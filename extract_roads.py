@@ -26,10 +26,10 @@
 # For REST APIs, refer: https://developer.here.com/develop/rest-apis
 
 
-key = 'GL4Ghj-44nBGKEZYxt8GKnQoi25c8qlFe98nX6nGJ1U'
+KEY = 'GL4Ghj-44nBGKEZYxt8GKnQoi25c8qlFe98nX6nGJ1U'
 
 
-from os import name
+# Get the distance funtions
 from dist import *
 
 
@@ -38,14 +38,14 @@ top_left = '26.77340115409228, 83.35400937128232'
 bottom_right = '26.74836515580979, 83.38955667002368'
 
 
-# small map
-top_left = '25.611141692828234, 85.07440251214753'
-bottom_right = '25.602840502150624, 85.0818697823339'
+# # small map
+# top_left = '25.611141692828234, 85.07440251214753'
+# bottom_right = '25.602840502150624, 85.0818697823339'
 
 
 # Refer: https://developer.here.com/documentation/traffic/dev_guide/topics/incident-data.html
 
-link = 'https://traffic.ls.hereapi.com/traffic/6.2/flow.xml?apiKey=' + key + '&bbox=' + top_left + ';' + bottom_right + '&responseattributes=sh,fc'
+link = 'https://traffic.ls.hereapi.com/traffic/6.2/flow.xml?apiKey=' + KEY + '&bbox=' + top_left + ';' + bottom_right + '&responseattributes=sh,fc'
 
 # Do the API call
 page = requests.get(link)
@@ -138,20 +138,24 @@ print('Number of nodes (Number of intersections) =', node_id)
 print('Number of edges (Number of roads) =', len(edges))
 
 
-# All the edges are in edges[]
+
+# All the edges and associated information is in edges[]
+
+
 # Store the edges in edges.csv file
 with open('edges.csv', 'w') as fi:
-    print('From', 'To', 'Weight', 'Traffic_level', 'Name', file=fi)    
+    print('From', 'To', 'Length(km)', 'Traffic_level', 'Name', file=fi)    
     for tup in edges:
         a, b, wt, name, traffic_level = tup
         print(a, b, wt, traffic_level, '"', file=fi, end='')
         print(name, '"', file=fi, sep='')
 
 
-# Store the coordintates
+# Store the coordintates in coordinates.csv file
 with open('coordinates.csv', 'w') as fi:
-    print('Node', 'Latitude', 'Longitude', file=fi)
+    print('Node_id', 'Latitude', 'Longitude', file=fi)
     for key in hash2:
         print(key, hash2[key][0], hash2[key][1], file=fi)
+
 
 
