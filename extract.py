@@ -64,7 +64,6 @@ hash2 = dict()  # node id to coordinates
 
 edges = set()   # to store the edges of the graph; edges are undirected
 
-# normalized_demand = dict()  # to store the demands at the nodes
 
 epsilon = 0.01  # when the retrieved data shows no traffic on a road, then assign epsilon traffic to it
 
@@ -134,17 +133,6 @@ for road in roads:
             edges.add((a, b, wt, name, traffic_level))
 
 
-            # # Add the demands
-            # if a in normalized_demand:
-            #     normalized_demand[a] += traffic_level/2
-            # else:
-            #     normalized_demand[a] = traffic_level/2
-            
-            # if b in normalized_demand:
-            #     normalized_demand[b] += traffic_level/2
-            # else:
-            #     normalized_demand[b] = traffic_level/2
-
 
 print('Number of nodes (Number of intersections) =', node_id)
 print('Number of edges (Number of roads) =', len(edges))
@@ -166,9 +154,4 @@ with open('coordinates.csv', 'w') as fi:
     for key in hash2:
         print(key, hash2[key][0], hash2[key][1], file=fi)
 
-
-# # Store the demands in a text file
-# with open('demands.txt', 'w') as fi:
-#     for a in normalized_demand:
-#         print(normalized_demand[a], file=fi)
 
