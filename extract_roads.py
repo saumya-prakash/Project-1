@@ -33,11 +33,8 @@ KEY = 'GL4Ghj-44nBGKEZYxt8GKnQoi25c8qlFe98nX6nGJ1U'
 from dist import *
 
 
-# # Gorapkhpur, UP, India
-# top_left = '26.77340115409228, 83.35400937128232'
-# bottom_right = '26.74836515580979, 83.38955667002368'
 
-# PATNA coordinates
+# # PATNA coordinates
 top_left = '25.637440467866426, 85.02811064635446'
 bottom_right = '25.582372756691644, 85.1740168271475'
 
@@ -45,6 +42,11 @@ bottom_right = '25.582372756691644, 85.1740168271475'
 # # small map
 # top_left = '25.611141692828234, 85.07440251214753'
 # bottom_right = '25.602840502150624, 85.0818697823339'
+
+
+# Gorapkhpur, UP, India
+# top_left = '26.77340115409228, 83.35400937128232'
+# bottom_right = '26.74836515580979, 83.38955667002368'
 
 
 # Refer: https://developer.here.com/documentation/traffic/dev_guide/topics/incident-data.html

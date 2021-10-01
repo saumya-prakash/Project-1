@@ -13,6 +13,7 @@ import math
 import random
 import networkx as nx
 from sklearn.metrics.pairwise import haversine_distances
+from tqdm import tqdm
 
 from dist import distance
 
@@ -72,6 +73,8 @@ def clustering(alpha):
 
     k = int(alpha*n) # number of centers to be created
 
+    print('Number of clusters =', k)
+
     clusters = []    # to store the 'points'
     centers = []     # to store the centers
 
@@ -114,27 +117,31 @@ def clustering(alpha):
         # move the new centers to the closest point 
         centers = [0]*k
 
-        for i in range(len(coordinates)):
-            print(i)
+        for i in tqdm(range(len(coordinates)), desc='Recalculatng centers'):
             cur = coordinates[i]
-
             for j in range(k):
                 if metric(new_centers[j], coordinates[centers[j]], 0, 0) > metric(new_centers[j], cur, 0, 0):
                     centers[j] = i
         
 
         # reassign points to new cluster centers
+        clusters = [[]] * k
+
+        for node_id in tqdm(coordinates, desc='Reassigning clusters'):
+            pos = coordinates[node_id]
+
+            ind = 0
+
+            for i in range(k):
+                if metric(pos, coordinates[centers[ind]], demands[centers[ind]], demands[node_id]) > metric(pos, coordinates[centers[i]], demands[centers[i]], demands[node_id]):
+                    ind = i
+            
+            clusters[ind].append(node_id)
         
-        
-
-
-
-    viables = []
-
-    return viables
+    return centers
 
 
 
 if __name__ == '__main__':
-    clustering(0.02)
-
+    viables = clustering(0.02)
+    print(viables)

@@ -36,7 +36,7 @@ n = max(df['From'].max(), df['To'].max()) + 1   # number of nodes
 
 for i in range(n):
     color= 'black'
-    if random.random() <= 0.25:
+    if random.random() <= 0.1:
         color = 'red'
     net.add_node(i, i, color=color) #, x=coord[i][0], y=coord[i][1])
 
