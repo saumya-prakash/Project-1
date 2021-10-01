@@ -3,7 +3,7 @@
 Do some sort of demand-assignment to nodes - 
     equal distribution to 2 vertices
     inverse sqaure decay wave
-    exponeential decay wave
+    exponential decay wave
 
 
 Generates demands.csv file

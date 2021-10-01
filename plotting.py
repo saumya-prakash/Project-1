@@ -1,15 +1,19 @@
-'''This program uses netwrokX
+'''This program uses PyVis
 
 Refer: https://towardsdatascience.com/visualizing-networks-in-python-d70f4cbeb259
 '''
 
 
+from pyvis.network import Network
 import matplotlib.pyplot as plt
-from numpy.lib.shape_base import split
 import random
 import pandas as pd
 from pyvis.physics import Physics
-from sklearn.utils.extmath import weighted_mode
+
+
+# import networkx as nx
+# G = nx.from_pandas_edgelist(df, source='From', target='To', edge_attr='Weight')
+
 
 df = pd.read_csv('edges.csv', sep=' ')
 cdf = pd.read_csv('coordinates.csv', sep=' ')
@@ -21,15 +25,11 @@ coord = dict()
 for _, row in cdf.iterrows():
     coord[int(row[0])] = (row[1], row[2])
 
-# import networkx as nx
-# G = nx.from_pandas_edgelist(df, source='From', target='To', edge_attr='Weight')
-
-from pyvis.network import Network
+    
 
 net = Network(heading='Map', height='800px', width='1800px')
 # net.from_nx(G)
 # net.show('Map.html')
-
 
 
 n = max(df['From'].max(), df['To'].max()) + 1   # number of nodes
@@ -43,14 +43,12 @@ for i in range(n):
 
 
 for _, row in df.iterrows():
-    u = int(row['From'])
-    v = int(row['To'])
-    wt = row['Weight']
-    name = row['Name']
+    u = int(row[0])
+    v = int(row[1])
+    wt = row[2]
+    name = row[4]
 
-    n = max(n, max(u, v))
-
-    net.add_edge(source=u, to=v, title=name+'; '+str(wt), color='black', width=10)
+    net.add_edge(source=u, to=v, title=name+'; '+str(wt), color='black', width=0)
 
 
 net.toggle_drag_nodes(False)

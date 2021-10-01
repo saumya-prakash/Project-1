@@ -1,6 +1,6 @@
 import requests
 from sklearn.metrics.pairwise import haversine_distances
-from math import radians, radians
+from math import radians
 import requests
 from bs4 import BeautifulSoup
 import xml.etree.ElementTree as ET
