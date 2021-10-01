@@ -12,25 +12,28 @@ import xml.etree.ElementTree as ET
 from xml.etree.ElementTree import XML, fromstring, tostring
 
 
-key = 'GL4Ghj-44nBGKEZYxt8GKnQoi25c8qlFe98nX6nGJ1U'
+KEY = 'GL4Ghj-44nBGKEZYxt8GKnQoi25c8qlFe98nX6nGJ1U'
 
-# PARIS coordinates
-top_left = '49.04360881961464, 1.9663553191345908'
-bottom_right = '48.688043406029145, 2.7939035384054076' 
+# # PARIS coordinates
+# top_left = '49.04360881961464, 1.9663553191345908'
+# bottom_right = '48.688043406029145, 2.7939035384054076' 
 
-# # # PATNA coordinates
-# # top_left = '25.637440467866426, 85.02811064635446'
-# # bottom_right = '25.582372756691644, 85.1740168271475'
+# PATNA coordinates
+top_left = '25.637440467866426, 85.02811064635446'
+bottom_right = '25.582372756691644, 85.1740168271475'
 
+
+# # Gorapkhpur, UP, India
 # top_left = '26.77340115409228, 83.35400937128232'
 # bottom_right = '26.74836515580979, 83.38955667002368'
+
 
 # # small map
 # top_left = '25.611141692828234, 85.07440251214753'
 # bottom_right = '25.602840502150624, 85.0818697823339'
 
 
-link = 'https://traffic.ls.hereapi.com/traffic/6.2/flow.xml?apiKey=' + key + '&bbox=' + top_left + ';' + bottom_right + '&responseattributes=sh,fc'
+link = 'https://traffic.ls.hereapi.com/traffic/6.2/flow.xml?apiKey=' + KEY + '&bbox=' + top_left + ';' + bottom_right + '&responseattributes=sh,fc'
 
 # Do the API call
 page = requests.get(link)

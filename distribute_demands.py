@@ -9,14 +9,11 @@ Do some sort of demand-assignment to nodes -
 Generates demands.csv file
 '''
 
-
-
 import pandas as pd
 
 
-
 def equally_between_end_vertices():
-
+    '''This function distributes the demand of a road equally between the 2 end vertices'''
     # Read in the edges.csv file
     edges = pd.read_csv('edges.csv', sep=' ')
 
@@ -40,13 +37,14 @@ def equally_between_end_vertices():
 
 
 
-demand = equally_between_end_vertices()
+if __name__ == '__main__':
 
-print('Demands distributed successfully')
+    demand = equally_between_end_vertices()
 
-with open('demands.csv', 'w') as fi:
-    print('Node_id', 'Demand', file=fi)
-    for a in demand:
-        print(a, demand[a], file=fi)
+    print('Demands distributed successfully')
 
+    with open('demands.csv', 'w') as fi:
+        print('Node_id', 'Demand', file=fi)
+        for a in demand:
+            print(a, demand[a], file=fi)
 

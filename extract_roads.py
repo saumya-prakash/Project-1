@@ -33,9 +33,13 @@ KEY = 'GL4Ghj-44nBGKEZYxt8GKnQoi25c8qlFe98nX6nGJ1U'
 from dist import *
 
 
-# Gorapkhpur, UP, India
-top_left = '26.77340115409228, 83.35400937128232'
-bottom_right = '26.74836515580979, 83.38955667002368'
+# # Gorapkhpur, UP, India
+# top_left = '26.77340115409228, 83.35400937128232'
+# bottom_right = '26.74836515580979, 83.38955667002368'
+
+# PATNA coordinates
+top_left = '25.637440467866426, 85.02811064635446'
+bottom_right = '25.582372756691644, 85.1740168271475'
 
 
 # # small map
@@ -144,7 +148,7 @@ print('Number of edges (Number of roads) =', len(edges))
 
 # Store the edges in edges.csv file
 with open('edges.csv', 'w') as fi:
-    print('From', 'To', 'Length(km)', 'Traffic_level', 'Name', file=fi)    
+    print('From', 'To', 'Length(meter)', 'Traffic_level', 'Name', file=fi)    
     for tup in edges:
         a, b, wt, name, traffic_level = tup
         print(a, b, wt, traffic_level, '"', file=fi, end='')
