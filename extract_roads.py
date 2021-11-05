@@ -25,18 +25,14 @@
 
 # For REST APIs, refer: https://developer.here.com/develop/rest-apis
 
+# Refer: https://developer.here.com/documentation/traffic/dev_guide/topics/incident-data.html
+
 
 KEY = 'GL4Ghj-44nBGKEZYxt8GKnQoi25c8qlFe98nX6nGJ1U'
 
 
 # Get the distance funtions
 from dist import *
-
-
-
-# # PATNA coordinates
-top_left = '25.637440467866426, 85.02811064635446'
-bottom_right = '25.582372756691644, 85.1740168271475'
 
 
 # # small map
@@ -49,13 +45,17 @@ bottom_right = '25.582372756691644, 85.1740168271475'
 # bottom_right = '26.74836515580979, 83.38955667002368'
 
 
-# Refer: https://developer.here.com/documentation/traffic/dev_guide/topics/incident-data.html
+# PATNA coordinates
+top_left = '25.637440467866426, 85.02811064635446'
+bottom_right = '25.582372756691644, 85.1740168271475'
+
+
+
 
 link = 'https://traffic.ls.hereapi.com/traffic/6.2/flow.xml?apiKey=' + KEY + '&bbox=' + top_left + ';' + bottom_right + '&responseattributes=sh,fc'
 
-# Do the API call
 page = requests.get(link)
-print(page.status_code, page.reason)
+# print(page.status_code, page.reason)
 
 
 # Parse the obtained document

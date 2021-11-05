@@ -93,13 +93,15 @@ def clustering(alpha):
         clusters.append(points[st:end])
         centers.append(points[st])
     
-
+    # THE DISTANCE METRIC THAT WILL BE USED DURING CLUSTERING
     metric = lambda a, b, d1, d2: distance(a, b) * math.exp(abs(d1-d2))
 
+    MAX_ITERATIONS = 100
+
     # Run 100 iterations
-    for iter in range(100):    
+    for iter in range(MAX_ITERATIONS):    
         
-        print('Iteration -', iter+1)
+        print('Iteration -', iter+1, '/', MAX_ITERATIONS)
 
         new_centers = []
         # calculate new center of the clusters
