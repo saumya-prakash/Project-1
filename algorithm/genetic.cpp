@@ -5,11 +5,16 @@ int main()
 {
     srand(time(NULL));
 
+    // Candidate sites are numbered from 0 to m-1
     int m = 0;
     cout<<"Enter number of candidate locations: ";
     cin>>m;
+    
+    // Clients are numbered from 0 to n-1
+    int n = 0;
+    cout<<"Enter number of clients: ";
+    cin>>n;
 
-    // Candidate sites are numbered from 0 to m-1
 
     cout<<"Enter the cost function: ";
     vector<int> construction(m, 0);
@@ -17,11 +22,6 @@ int main()
     for(int i=0; i<m; i++)
         cin>>construction[i];
 
-    int n = 0;
-    cout<<"Enter number of clients: ";
-    cin>>n;
-
-    // Clients are numbered from 0 to n-1
 
     cout<<"Enter the cost matrix: ";
     vector<vector<int>> weight(n, vector<int>(m, 0));
