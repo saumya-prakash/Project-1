@@ -41,10 +41,11 @@ if __name__ == '__main__':
 
     demand = equally_between_end_vertices()
 
-    print('Demands distributed successfully')
+    # print('Demands distributed successfully')
 
     with open('demands.csv', 'w') as fi:
         print('Node_id', 'Demand', file=fi)
         for a in demand:
             print(a, demand[a], file=fi)
 
+    print('demands.csv file generated')

@@ -1,7 +1,7 @@
 '''This program finds candidate sites form the nodes. It uses the demands at each node.
 
     purely random
-    some sort of clustering -> most promising
+    some sort of clustering -> seems to be most promising
     probability = relative demand at a node -> won't work if there are many nodes; probability at each node
                                                 will tend to 0
     based on range of the EV
@@ -144,6 +144,10 @@ def clustering(alpha):
 
 
 
+
 if __name__ == '__main__':
     viables = clustering(0.02)
-    print(viables)
+    # viables = relative_demand_probability()
+
+
+    print('viables.csv file generated')

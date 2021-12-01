@@ -1,6 +1,7 @@
 #include "utils.h"
 
 // This function creates a random chromosome and returns it
+// O(m+n)
 vector<int> random_chromosome(int m, int n)
 {
     vector<int> chromosome(m+n, 0);
@@ -46,6 +47,7 @@ vector<int> random_chromosome(int m, int n)
 
 
 // This function permutates the given array range
+// linear time complexity
 void permutate(int begin, int end, vector<int> &arr)
 {
     // permutate the elements in the range [begin, end)
@@ -64,6 +66,7 @@ void permutate(int begin, int end, vector<int> &arr)
 
 
 // This function prints the chromosome
+// O(m+n)
 void print_chromosome(vector<int> &chromosome, int m, int n)
 {
     for(int i=0; i<m; i++)
@@ -80,6 +83,7 @@ void print_chromosome(vector<int> &chromosome, int m, int n)
 }
 
 
+// O(log m)
 int locate(int key, const vector<int> &arr, const int n)
 {
     int low = 0;
@@ -113,6 +117,8 @@ int locate(int key, const vector<int> &arr, const int n)
 
 
 // This function calculates the objective function on the given chromosome 
+// m*log(m) + m*log(m) + n
+// O(m*log(m) + n) 
 int objective_function(vector<int> &chromosome, int m, int n, vector<int> &construction, vector<vector<int>> &weight)
 {
     int total = 0;  // to store the value
@@ -162,6 +168,8 @@ int objective_function(vector<int> &chromosome, int m, int n, vector<int> &const
 }
 
 
+// This functnio does crossover between 2 chromosomes and returns 2 children
+// O(m+n)
 pair<vector<int>, vector<int>> crossover(vector<int> &chr1, vector<int> &chr2, int m, int n)
 {
     vector<int> child_1(m+n, -1);
@@ -206,6 +214,7 @@ pair<vector<int>, vector<int>> crossover(vector<int> &chr1, vector<int> &chr2, i
 
 
 // This function validates a given chromosome
+// O(m+n)
 void validate(vector<int> &chromosome, int m, int n)
 {
     // Check the station part

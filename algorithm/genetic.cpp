@@ -54,6 +54,7 @@ int main()
 
     // Run for 'iter' iterations
     int iter = 10000;
+    //O(N*[N + mlog(m) + n])
     while(iter > 0)
     {
         // cout<<iter<<endl;

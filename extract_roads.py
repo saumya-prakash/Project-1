@@ -156,6 +156,7 @@ with open('edges.csv', 'w') as fi:
         print(a, b, wt, traffic_level, '"', file=fi, end='')
         print(name, '"', file=fi, sep='')
 
+print('edges.csv file generated')
 
 # Store the coordintates in coordinates.csv file
 with open('coordinates.csv', 'w') as fi:
@@ -163,5 +164,5 @@ with open('coordinates.csv', 'w') as fi:
     for key in hash2:
         print(key, hash2[key][0], hash2[key][1], file=fi)
 
-
+print('coordinates.csv file generated')
 
