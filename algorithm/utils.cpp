@@ -205,12 +205,12 @@ pair<vector<int>, vector<int>> crossover(vector<int> &chr1, vector<int> &chr2, i
 }
 
 
-
+// This function validates a given chromosome
 void validate(vector<int> &chromosome, int m, int n)
 {
     // Check the station part
 
-    // 0 a must and no repetition
+    // 0 is a must and no repetition
 
     vector<int> aux(n, 0);
 
@@ -218,7 +218,7 @@ void validate(vector<int> &chromosome, int m, int n)
     {
         int cur = chromosome[i];
 
-        if(cur >= 0)
+        if(cur >= 0)    // -1s to be ignored
             aux[cur]++;
     }
 
@@ -227,17 +227,17 @@ void validate(vector<int> &chromosome, int m, int n)
     {
         int cur = chromosome[i];
 
-        if(cur >= 0 && aux[cur] > 1)
+        if(cur >= 0 && aux[cur] > 1)    // cur occurs more than once
         {
-            chromosome[i] = -1;
-            aux[cur]--;
+            chromosome[i] = -1;         // make this entry of cur -1
+            aux[cur]--;                 // decrement the total count of cur
         }
     }
 
-    // if 0 is not present, insert it randomly at some location
+    // if 0 is not present, insert it at some random location
     if(aux[0] == 0)
     {
-        int cnt = 0;
+        int cnt = 0;    // to store the number of -1s
         for(int i=0; i<m; i++)
             if(chromosome[i] == -1)
                 cnt++;
@@ -260,6 +260,9 @@ void validate(vector<int> &chromosome, int m, int n)
 
 
     // Check the ID part
+
+    // all numbers from 0 to n-1 should be present, no duplicates allowed
+
     aux = vector<int>(n, 0);
 
     for(int i=m; i<chromosome.size(); i++)
@@ -267,22 +270,22 @@ void validate(vector<int> &chromosome, int m, int n)
         aux[chromosome[i]]++;
     }
 
+    
     int a = 0;
-
     for(int i=m; i<chromosome.size(); i++)
     {
         int cur = chromosome[i];
 
-        if(aux[cur] > 1)
+        if(aux[cur] > 1)    // cur is repeated -> correct this
         {
-            // correct this
-            aux[cur]--;
+            aux[cur]--; // decrement the count of cur
 
+            // Find the first number from 0 to n-1 that is missing
             while(a<n && aux[a] != 0)
                 a++;
             
-            chromosome[i] = a;
-            aux[a] = 1;
+            chromosome[i] = a;  // assign the missing number here
+            aux[a] = 1;         // update the count of the missing number
         }
     }
 

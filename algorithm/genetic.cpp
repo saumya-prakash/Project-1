@@ -53,7 +53,7 @@ int main()
 
 
     // Run for 'iter' iterations
-    int iter = 50000;
+    int iter = 10000;
     while(iter > 0)
     {
         // cout<<iter<<endl;
@@ -84,7 +84,6 @@ int main()
 
         // 2-point Crossover
         pair<vector<int>, vector<int>> children = crossover(chr1, chr2, m, n);
-
 
         // Validate
         validate(children.first, m, n);
