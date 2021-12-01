@@ -30,22 +30,23 @@ public:
     }
 
 
-    int solve()
+    pair<int, int> solve()
     {
         // can assign any station to a given client
         // generate all such assignments and check
 
         allotment = vector<int>(n, -1);
 
-        int res = INT_MAX;
+        int best = INT_MAX;
+        int worst = INT_MIN;
+        generate_check(0, best, worst);
 
-        generate_check(0, res);
-
-        return res;
+        return pair<int, int>(best, worst);
     }
 
+
 private:
-    void generate_check(int cur, int &res)
+    void generate_check(int cur, int &best, int &worst)
     {
         if(cur == n)    // all clients assigned to some station
         {
@@ -68,7 +69,8 @@ private:
 
             }
 
-            res = min(res, tmp);
+            best = min(best, tmp);
+            worst = max(worst, tmp);
 
             return;
         }
@@ -76,11 +78,13 @@ private:
         for(int i=0; i<m; i++)
         {
             allotment[cur] = i;
-            generate_check(cur+1, res);
+            generate_check(cur+1, best, worst);
         }
 
         return;
     }
+
+
 };
 
 
@@ -102,9 +106,11 @@ int main()
 
     // get the optimal value using brute-force technique
     cout<<"Calculating..."<<endl;
-    int res = bf.solve();
 
-    cout<<"Optimal value = "<<res<<endl;
+    pair<int, int> res = bf.solve();
+    cout<<"Optimal value = "<<res.first<<endl;
+    cout<<"Worst value = "<<res.second<<endl;
+
 
 
     return 0;

@@ -42,6 +42,7 @@ int main()
     int total = 0;
 
     int ini_num = 10;
+
     for(int i=0; i<ini_num; i++)
     {
         vector<int> tmp = random_chromosome(m, n);
@@ -52,12 +53,11 @@ int main()
         value.push_back(a);
     }
 
-    // Run for 1000 iterations
-    int iter = 1000;
+    // Run for iter iterations
+    int iter = 10000;
     while(iter > 0)
     {
         // Select 2 chromosomes
-
         vector<int> chr1, chr2;
 
         int cnt = 2;
@@ -81,7 +81,6 @@ int main()
             continue;
         }
 
-
         // 2-point Crossover
         pair<vector<int>, vector<int>> children = crossover(chr1, chr2, m, n);
 
@@ -103,10 +102,8 @@ int main()
         total += a;
         value.push_back(a);
 
-
-        iter--;
+        iter--;  
     }
-
 
     // Print the final result
     int ind = -1;

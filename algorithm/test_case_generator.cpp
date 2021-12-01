@@ -11,13 +11,19 @@ int main()
 
     vector<int> construction_cost(m, 0);
     for(int i=0; i<m; i++)
-        construction_cost[i] = rand()%100 + 1;
+        construction_cost[i] = 1; //rand()%100 + 1;
 
 
     vector<vector<int>> distance_cost(n, vector<int>(m, 0));
     for(int i=0; i<n; i++)
         for(int j=0; j<m; j++)
-            distance_cost[i][j] = rand()%60 + 1;
+        {
+            if(rand()%5 == 0)
+                distance_cost[i][j] = rand()%1000 + 1000;
+            else
+                distance_cost[i][j] = rand()%100 + 1;
+        }
+
 
     // write to a file
     ofstream fi;
