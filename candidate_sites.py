@@ -148,6 +148,6 @@ def clustering(alpha):
 if __name__ == '__main__':
     viables = clustering(0.02)
     # viables = relative_demand_probability()
-
+    
 
     print('viables.csv file generated')

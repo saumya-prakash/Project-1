@@ -15,3 +15,5 @@ int objective_function(vector<int> &chromosome, int m, int n, vector<int> &const
 pair<vector<int>, vector<int>> crossover(vector<int> &chr1, vector<int> &chr2, int m, int n);
 
 void validate(vector<int> &chromosome, int m, int n);
+
+void geneticAlgorithm(int m, int n, vector<int> &construction, vector<vector<int>> &weight, vector<vector<int>> &population, vector<int> &value);

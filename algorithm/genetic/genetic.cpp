@@ -1,4 +1,4 @@
-#include "utils.h"
+#include "genetic.h"
 
 // This function creates a random chromosome and returns it
 // O(m+n)
@@ -300,3 +300,89 @@ void validate(vector<int> &chromosome, int m, int n)
 
     return;
 }
+
+
+
+/*************************************************************************************
+ * MAIN function ahead
+ * ***********************************************************************************/
+
+void geneticAlgorithm(int m, int n, vector<int> &construction, vector<vector<int>> &weight, vector<vector<int>> &population, vector<int> &value)
+{
+    // Create the initial chromosomes
+
+    population = vector<vector<int>>();
+    value = vector<int>();
+
+    int total = 0;  // to store the total fitness value of the population
+    int ini_num = 10;
+    for(int i=0; i<ini_num; i++)
+    {
+        vector<int> tmp = random_chromosome(m, n);
+        population.push_back(tmp);
+
+        int a = objective_function(tmp, m, n, construction, weight);
+        total += a;
+        value.push_back(a);
+    }
+
+
+    // Run for 'iter' iterations
+    int iter = 10000;
+    // O(N*[N + mlog(m) + n])
+    while(iter > 0)
+    {
+        // cout<<iter<<endl;
+
+        // Select 2 chromosomes
+        vector<int> chr1, chr2;
+
+        int cnt = 2;
+        for(int i=0; i<population.size() && cnt>0; i++)
+        {
+            int cur = value[i];
+
+            double prob = 1 - (double)value[i] / total;
+
+            if(drand48() <= prob)
+            {
+                chr2 = chr1;
+                chr1 = population[i];
+
+                cnt--;
+            }
+        }
+
+        if(cnt > 0)
+        {
+            continue;
+        }
+
+        // 2-point Crossover
+        pair<vector<int>, vector<int>> children = crossover(chr1, chr2, m, n);
+
+        // Validate
+        validate(children.first, m, n);
+        validate(children.second, m, n);
+
+
+        // Add to the population
+
+        population.push_back(children.first);
+        int a = objective_function(children.first, m, n, construction, weight);
+        total += a;
+        value.push_back(a);
+
+        population.push_back(children.second);
+        a = objective_function(children.second, m, n, construction, weight);
+        total += a;
+        value.push_back(a);
+
+        iter--;  
+    }
+
+
+    return;
+}
+
+
