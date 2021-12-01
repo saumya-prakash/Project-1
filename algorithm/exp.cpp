@@ -6,7 +6,7 @@ void generate_test_case(int m, int n, vector<int> &construction_cost, vector<vec
     construction_cost = vector<int>(m, 0);
     
     for(int i=0; i<m; i++)
-        construction_cost[i] = 1; //rand()%100 + 1;
+        construction_cost[i] = rand()%100 + 1;
 
 
     distance_cost = vector<vector<int>>(n, vector<int>(m, 0));
@@ -32,10 +32,15 @@ int main()
 
     ofstream of("stats");
 
+    int mx[] = {2, 3, 4, 5, 6, 7, 8, 9};
+    int ny[] = {2, 3, 4, 5, 6, 7, 8, 9};
+
+    vector<pair<int, int>> aux;
+
     // m^n -> i^j
-    for(int i=2; i<=10; i++)
+    for(int i=2; i<=9; i++)
     {
-        for(int j=2; j<=8; j++)
+        for(int j=i; j<=9; j++)
         {
             generate_test_case(i, j, construction, cost);
 
