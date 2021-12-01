@@ -1,5 +1,6 @@
 #include "utils.h"
 
+// This function creates a random chromosome and returns it
 vector<int> random_chromosome(int m, int n)
 {
     vector<int> chromosome(m+n, 0);
@@ -44,7 +45,7 @@ vector<int> random_chromosome(int m, int n)
 }
 
 
-
+// This function permutates the given array range
 void permutate(int begin, int end, vector<int> &arr)
 {
     // permutate the elements in the range [begin, end)
@@ -61,6 +62,8 @@ void permutate(int begin, int end, vector<int> &arr)
     return;
 }
 
+
+// This function prints the chromosome
 void print_chromosome(vector<int> &chromosome, int m, int n)
 {
     for(int i=0; i<m; i++)
@@ -77,31 +80,76 @@ void print_chromosome(vector<int> &chromosome, int m, int n)
 }
 
 
+int locate(int key, const vector<int> &arr, const int n)
+{
+    int low = 0;
+    int high = arr.size()-1;
+
+    int a = INT_MAX;
+
+    while(low <= high)
+    {
+        int mid = low + (high-low)/2;
+
+        if(arr[mid] == key)
+        {
+            a = mid;
+            break;
+        }
+
+        else if(arr[mid] > key)
+            high = mid-1;
+        
+        else
+            low = mid+1;
+    }
+
+    if(a == arr.size()-1)
+        return n;
+    
+    return arr[a+1];
+}
 
 
 
-
+// This function calculates the objective function on the given chromosome 
 int objective_function(vector<int> &chromosome, int m, int n, vector<int> &construction, vector<vector<int>> &weight)
 {
-    int total = 0;
+    int total = 0;  // to store the value
+
+    vector<int> aux;
+    for(int i=0; i<m; i++)
+        aux.push_back(chromosome[i]);
+    sort(aux.begin(), aux.end());
+
+    // for(int i=0; i<m; i++)
+    //     cout<<chromosome[i]<<" ";
+    // cout<<endl;
 
     for(int i=0; i<m; i++)
     {
         if(chromosome[i] >= 0)
         {
+            // const of constructing the ith station
             total += construction[i];
 
-            int key = chromosome[i];
-            int a = INT_MAX;
-            for(int j=0; j<m; j++)
-            {
-                if(chromosome[j] > key && chromosome[j] < a)
-                    a = chromosome[j];
-            }
-
-            if(a == INT_MAX)
-                a = n;
+            // Find the next largest number in the first half of the chromosome
             
+            int key = chromosome[i];
+            // int a = INT_MAX;
+            // for(int j=0; j<m; j++)
+            // {
+            //     if(chromosome[j] > key && chromosome[j] < a)
+            //         a = chromosome[j];
+            // }
+
+            // if(a == INT_MAX)
+            //     a = n;
+            
+            int a = locate(key, aux, n);
+            // cout<<key<<"->"<<a<<" "<<b<<endl;
+            // assert(a == b);
+
             for(int j=key; j<a; j++)
             {
                 // Assign client-j to the station-i
@@ -112,6 +160,7 @@ int objective_function(vector<int> &chromosome, int m, int n, vector<int> &const
 
     return total;
 }
+
 
 pair<vector<int>, vector<int>> crossover(vector<int> &chr1, vector<int> &chr2, int m, int n)
 {

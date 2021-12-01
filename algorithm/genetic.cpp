@@ -3,6 +3,7 @@
 
 int main()
 {
+    // seed the random number generator
     srand(time(NULL));
 
     // Candidate sites are numbered from 0 to m-1
@@ -32,17 +33,14 @@ int main()
 
 
     cout<<endl<<endl;
-
-    // Define the initial chromosomes
     
-
     vector<vector<int>> population;
     vector<int> value;
 
-    int total = 0;
+    // Create the initial chromosomes
 
+    int total = 0;  // to store the total fitness value of the population
     int ini_num = 10;
-
     for(int i=0; i<ini_num; i++)
     {
         vector<int> tmp = random_chromosome(m, n);
@@ -53,10 +51,13 @@ int main()
         value.push_back(a);
     }
 
-    // Run for iter iterations
-    int iter = 10000;
+
+    // Run for 'iter' iterations
+    int iter = 50000;
     while(iter > 0)
     {
+        // cout<<iter<<endl;
+
         // Select 2 chromosomes
         vector<int> chr1, chr2;
 
