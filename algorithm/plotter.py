@@ -70,7 +70,14 @@ for i in range(len(x)):
 
 import numpy as np
 
-print(np.mean(error))
+print('minimum =', np.min(error))
+print('maximum =', np.max(error))
+print('mean =', np.mean(error))
+print('std =', np.std(error))
+print('0.25 quantile =', np.quantile(error, 0.25))
+print('0.50 quantile =', np.quantile(error, 0.50))
+print('0.75 quantile =', np.quantile(error, 0.75))
+
 
 plt.xlabel('Testcase #')
 plt.ylabel('Error')
