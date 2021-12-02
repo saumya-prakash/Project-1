@@ -23,9 +23,11 @@ for row in data:
     y1.append(t1)
     y2.append(t2)
 
-plt.plot(x, y1)
-plt.plot(x, y2)
-
+plt.xlabel('Input size')
+plt.ylabel('Running time (in seconds)')
+plt.plot(x, y1, label='Brute Force')
+plt.plot(x, y2, label='Genetic Algortihm')
+plt.legend()
 plt.show()
 
 
@@ -65,6 +67,10 @@ plt.show()
 error = []
 for i in range(len(x)):
     error.append(abs(y1[i]-y3[i])/y1[i])
+
+import numpy as np
+
+print(np.mean(error))
 
 plt.xlabel('Testcase #')
 plt.ylabel('Error')
