@@ -361,13 +361,12 @@ void geneticAlgorithm(int m, int n, vector<int> &construction, vector<vector<int
         // 2-point Crossover
         pair<vector<int>, vector<int>> children = crossover(chr1, chr2, m, n);
 
-        // Validate
+        // Validate, and mutate if something wrong
         validate(children.first, m, n);
         validate(children.second, m, n);
 
 
         // Add to the population
-
         population.push_back(children.first);
         int a = objective_function(children.first, m, n, construction, weight);
         total += a;
