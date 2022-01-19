@@ -51,6 +51,6 @@ for _, row in df.iterrows():
     net.add_edge(source=u, to=v, title=name+'; '+str(wt), color='black', width=0)
 
 
-net.toggle_drag_nodes(False)
+net.toggle_drag_nodes(True)
 net.toggle_physics(False)
 net.show('map.html')
