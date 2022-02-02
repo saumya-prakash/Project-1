@@ -92,6 +92,8 @@ plt.style.use('dark_background')
 
 plt.grid(False)
 
+print(lats[0], lats[1])
+
 for i in range(0,len(lats)):
 
     if(sus[i]/ffs[i]<0.25):

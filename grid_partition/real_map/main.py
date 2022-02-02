@@ -1,16 +1,17 @@
-import pandas as pd
 from utils import *
 
 
-edges = pd.read_csv('edges.csv', sep=' ')
+graph, n = get_graph('edges.csv')
 
-# Find the total number of nodes
-n = max(max(edges['From']), max(edges['To'])) + 1
+coord = get_coordinates('coordinates.csv')
 
-# It will store the adjacency list representation of the graph
-graph = []
-for _ in range(n):
-    graph.append([])
+demands = get_demands('demands.csv')
 
+# Number of partitions
+P = 6
 
+color = ['#000000'] * n # all the nodes are black initially
 
+partition(graph, P, coord, demands, color)
+
+plot_graph(graph, coord, color)
