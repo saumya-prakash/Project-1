@@ -40,16 +40,22 @@ from dist import *
 # bottom_right = '25.602840502150624, 85.0818697823339'
 
 
-# Gorapkhpur, UP, India
-top_left = '26.77340115409228, 83.35400937128232'
-bottom_right = '26.74836515580979, 83.38955667002368'
+# # Gorapkhpur, UP, India
+# top_left = '26.77340115409228, 83.35400937128232'
+# bottom_right = '26.74836515580979, 83.38955667002368'
 
 
-# PATNA coordinates
-# top_left = '25.637440467866426, 85.02811064635446'
-# bottom_right = '25.582372756691644, 85.1740168271475'
+# # PATNA coordinates
+# top_left = '25.629005146302, 85.06621735528832'
+# bottom_right = '25.58068061010138, 85.1761472496063'
 
+# # PARIS coordinates
+# top_left = '49.04360881961464, 1.9663553191345908'
+# bottom_right = '48.688043406029145, 2.7939035384054076' 
 
+# # New Delhi
+# top_left = '28.687203816391193, 77.04710350388676'
+# bottom_right = '28.547244344345092, 77.41867712678446'
 
 
 link = 'https://traffic.ls.hereapi.com/traffic/6.2/flow.xml?apiKey=' + KEY + '&bbox=' + top_left + ';' + bottom_right + '&responseattributes=sh,fc'

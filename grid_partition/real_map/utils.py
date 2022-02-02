@@ -65,29 +65,29 @@ def get_demands(filename):
 
 
 
-def plot_graph(graph, coord, color):
+def plot_graph(graph, coord, color, name):
     n  =len(graph)
 
     fig = plt.figure()
-    plt.style.use('dark_background')
+    # plt.style.use('dark_background')
 
     plt.grid(False)
+    
 
     for u in range(n):
         for v, _ in graph[u]:
             lats = [coord[u][0], coord[v][0]]
             longs = [coord[u][1], coord[v][1]]
 
-            plt.plot(lats, longs, c=color[u], linewidth=1)
-
-
+            plt.plot(longs, lats, c=color[u], linewidth=0.5)
 
     plt.axis('off')
-    plt.show()
+    plt.savefig(name)
+    # plt.show()
     
 
 
-palatte = ['red', 'blue', 'yellow', 'green', 'black', 'orange', 'cyan', 'pink', 'magenta']
+palatte = ['red', 'blue', 'yellow', 'green', 'orange', 'cyan', 'pink', 'magenta', 'black']
 
 def partition(graph, P, coord, demands, color):
     '''Partiotion the graph into 'np' number of components'''
@@ -140,5 +140,10 @@ def partition(graph, P, coord, demands, color):
         if current >= limit:
             current = 0
             q += 1
+            print('plot -', q, '...')
+            plot_graph(graph, coord, color, str(q)+'.png')
 
+
+
+    return
     

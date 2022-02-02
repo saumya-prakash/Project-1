@@ -19,14 +19,18 @@ KEY = 'GL4Ghj-44nBGKEZYxt8GKnQoi25c8qlFe98nX6nGJ1U'
 # bottom_right = '48.688043406029145, 2.7939035384054076' 
 
 # # PATNA coordinates
-# top_left = '25.637440467866426, 85.02811064635446'
-# bottom_right = '25.582372756691644, 85.1740168271475'
+# top_left = '25.629005146302, 85.06621735528832'
+# bottom_right = '25.58068061010138, 85.1761472496063'
 
 
 # Gorapkhpur, UP, India
 top_left = '26.77340115409228, 83.35400937128232'
 bottom_right = '26.74836515580979, 83.38955667002368'
 
+
+# # New Delhi
+# top_left = '28.687203816391193, 77.04710350388676'
+# bottom_right = '28.547244344345092, 77.41867712678446'
 
 # # small map
 # top_left = '25.611141692828234, 85.07440251214753'
@@ -88,13 +92,14 @@ for road in roads:
 
 
 fig = plt.figure()
-plt.style.use('dark_background')
+# plt.style.use('dark_background')
 
 plt.grid(False)
 
-print(lats[0], lats[1])
-
 for i in range(0,len(lats)):
+
+    plt.plot(longs[i], lats[i], c='black',linewidth=0.5)
+    continue    
 
     if(sus[i]/ffs[i]<0.25):
         plt.plot(longs[i], lats[i], c='brown',linewidth=0.5)

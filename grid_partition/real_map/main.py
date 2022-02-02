@@ -12,6 +12,8 @@ P = 6
 
 color = ['#000000'] * n # all the nodes are black initially
 
+print('Partitioning...')
 partition(graph, P, coord, demands, color)
 
-plot_graph(graph, coord, color)
+# print('Plotting...')
+# plot_graph(graph, coord, color, 'partitioned.png')
