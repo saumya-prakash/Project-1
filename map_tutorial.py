@@ -37,6 +37,17 @@ bottom_right = '26.74836515580979, 83.38955667002368'
 # bottom_right = '25.602840502150624, 85.0818697823339'
 
 
+# Mumbai
+top_left = '19.36948637980195, 72.79233915629305'
+bottom_right = '18.963866, 73.074425'
+
+
+# # Hyderabad
+# top_left = '17.583876, 78.180753' 
+# bottom_right = '17.235038, 78.645444'
+
+
+
 link = 'https://traffic.ls.hereapi.com/traffic/6.2/flow.xml?apiKey=' + KEY + '&bbox=' + top_left + ';' + bottom_right + '&responseattributes=sh,fc'
 
 # Do the API call

@@ -12,8 +12,20 @@ P = 6
 
 color = ['#000000'] * n # all the nodes are black initially
 
-print('Partitioning...')
-partition(graph, P, coord, demands, color)
+d = disonnected_components(graph)
+print(len(d))
 
-# print('Plotting...')
-# plot_graph(graph, coord, color, 'partitioned.png')
+# print('Partitioning...')
+# partition(graph, P, coord, demands, color)
+
+
+# How to partition well???
+## BFS-based
+## gird baesd - draw parallel lines - divide into rectangular regions!!
+
+
+color_components(d, color)
+refine_components(d, graph, demands, color, P)
+
+print('Plotting...')
+plot_graph(graph, coord, color, 'partitioned.png')

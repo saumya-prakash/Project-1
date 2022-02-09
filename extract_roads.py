@@ -58,6 +58,15 @@ from dist import *
 # bottom_right = '28.547244344345092, 77.41867712678446'
 
 
+# Mumbai
+top_left = '19.36948637980195, 72.79233915629305'
+bottom_right = '18.963866, 73.074425'
+
+# # Hyderabad
+# top_left = '17.583876, 78.180753' 
+# bottom_right = '17.235038, 78.645444'
+
+
 link = 'https://traffic.ls.hereapi.com/traffic/6.2/flow.xml?apiKey=' + KEY + '&bbox=' + top_left + ';' + bottom_right + '&responseattributes=sh,fc'
 
 page = requests.get(link)
