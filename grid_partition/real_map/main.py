@@ -1,19 +1,32 @@
-from utils import *
-
+from input import *
+from partition import *
 
 graph, n = get_graph('edges.csv')
-
 coord = get_coordinates('coordinates.csv')
-
 demands = get_demands('demands.csv')
 
-# Number of partitions
-P = 6
+print('Number of nodes =', n)
 
-color = ['#000000'] * n # all the nodes are black initially
+# # Number of partitions
+# P = 6
 
-d = disonnected_components(graph)
-print(len(d))
+# color = ['#000000'] * n # all the nodes are black initially
+
+# d = disonnected_components(graph)
+# print('Number of disconnected components =', len(d))
+
+
+pr = GridPartition(n, coord, demands)
+
+td = pr.totalDemand()
+
+print('Limit =', td/6)
+pr.setLimit(td/6)
+
+pr.partition()
+
+print(len(pr.components))
+
 
 # print('Partitioning...')
 # partition(graph, P, coord, demands, color)
@@ -24,8 +37,8 @@ print(len(d))
 ## gird baesd - draw parallel lines - divide into rectangular regions!!
 
 
-color_components(d, color)
-refine_components(d, graph, demands, color, P)
+# color_components(d, color)
+# refine_components(d, graph, demands, color, P)
 
 print('Plotting...')
-plot_graph(graph, coord, color, 'partitioned.png')
+plot_graph(graph, coord, pr.color, 'partitioned.png')

@@ -36,8 +36,13 @@ def get_coordinates(filename):
 
     # coordinates.csv file stores the coordinates of the nodes
     coordinates = pd.read_csv(filename, sep=' ')
+    
+    n = len(coordinates)    # number of rows in the file
 
-    coord = {}
+    coord = []
+    for _ in range(n):
+        coord.append((0.0, 0.0))
+
     for row in coordinates.itertuples():
         _, node, lat, long = row
 
@@ -66,7 +71,8 @@ def get_demands(filename):
 
 
 def plot_graph(graph, coord, color, name):
-    n  =len(graph)
+    
+    n = len(graph)
 
     fig = plt.figure()
     # plt.style.use('dark_background')
