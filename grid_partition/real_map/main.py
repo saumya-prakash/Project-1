@@ -22,10 +22,11 @@ td = pr.totalDemand()
 
 print('Limit =', td/6)
 pr.setLimit(td/6)
+pr.setRange(15)
 
 pr.partition()
 
-print(len(pr.components))
+print('Number of partitions =', len(pr.components))
 
 
 # print('Partitioning...')
@@ -40,5 +41,9 @@ print(len(pr.components))
 # color_components(d, color)
 # refine_components(d, graph, demands, color, P)
 
-print('Plotting...')
-plot_graph(graph, coord, pr.color, 'partitioned.png')
+# pr.colorPartitions()
+
+# print('Plotting...')
+# plot_graph(graph, coord, pr.color, 'partitioned.png')
+
+
