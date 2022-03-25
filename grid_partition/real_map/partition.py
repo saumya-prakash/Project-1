@@ -1,6 +1,7 @@
 import numpy as np
 from sklearn.metrics.pairwise import haversine_distances
 from math import radians
+import random
 
 class GridPartition:
     
@@ -8,7 +9,6 @@ class GridPartition:
         self.n = _n
         self.coord = _coord
         self.demands = _demands
-        
         
         self.limit = -1 # no limit set initially
         self.range = 9999999    # range of a typical EV 
@@ -125,7 +125,6 @@ class GridPartition:
     def __aux_partition(self, st, end):
         
         # focus on nodes in range arr[st:end]
-
         if st >= end:
             print("st >= end passed")
             return
@@ -138,9 +137,8 @@ class GridPartition:
             # do the range-check
             ## estimate from diagonals
             dia = self.__diagonalLength(self.arr[st:end])
-            
-            if dia > self.range      and False:
-                print(dia, "Range partitioning needed")
+            if dia > self.range:
+                # print(dia, "Range partitioning needed")
                 # find the 'length'
                 t1 = self.__length(self.arr[st:end])
                 # find the 'breadth'
@@ -223,7 +221,7 @@ class GridPartition:
             raise ("Couldn't find a suitable point")
 
 
-        self.__aux_partition(st, ind+1)
+        self.__aux_partition(st, ind)
         self.__aux_partition(ind+1, end)
         
         return
@@ -239,17 +237,24 @@ class GridPartition:
 
         # call an auxiliary function
         self.__aux_partition(0, self.n)
+        return
 
 
     def colorPartitions(self):
         palatte = ['red', 'blue', 'yellow', 'green', 'orange', 'cyan', 'pink', 'magenta', 'brown', 'black', 'gold', 'silver', 'platinum']
         
-        a = 0
+        if len(self.components) <= len(palatte):
+            a = 0
+            for arr in self.components:
+                for i in arr:
+                    self.color[i] = palatte[a]
+                a += 1
 
-        for arr in self.components:
-            for i in arr:
-                self.color[i] = palatte[a]
-            a += 1
+        else:
+            for arr in self.components:
+                c = (random.random(), random.random(), random.random())
+                for i in arr:
+                    self.color[i] = c
 
         return
     

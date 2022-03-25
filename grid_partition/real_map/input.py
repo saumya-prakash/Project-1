@@ -76,9 +76,7 @@ def plot_graph(graph, coord, color, name):
 
     fig = plt.figure()
     # plt.style.use('dark_background')
-
     plt.grid(False)
-    
 
     for u in range(n):
         for v, _ in graph[u]:
@@ -90,7 +88,36 @@ def plot_graph(graph, coord, color, name):
     plt.axis('off')
     plt.savefig(name)
     # plt.show()
+    return
     
+
+
+def plot_component(graph, compo, coord, color, name):
+
+    n = len(graph)
+
+    fig = plt.figure()
+    plt.grid(False)
+
+    for u in compo:
+        for v, _ in graph[u]:
+            if v in compo:
+                lats = [coord[u][0], coord[v][0]]
+                longs = [coord[u][1], coord[v][1]]
+
+                plt.plot(longs, lats, c=color[u], linewidth=0.5)
+    
+    # a = [77.14811, 28.52951]
+    # b = [77.09274965572511, 28.53104908606825]
+    # plt.plot([a[0], a[0]], [a[1], a[1]], c='red', linewidth=5)
+    # plt.plot([b[0], b[0]], [b[1], b[1]], c='blue', linewidth=5)
+
+    plt.plot()
+    plt.axis('off')
+    plt.savefig(name)
+
+    return
+
 
 
 palatte = ['red', 'blue', 'yellow', 'green', 'orange', 'cyan', 'pink', 'magenta', 'brown', 'black']
