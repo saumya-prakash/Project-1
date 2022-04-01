@@ -34,31 +34,29 @@ int main()
 
     cout<<endl<<endl;
     
-    vector<vector<int>> population;
-    vector<int> value;
-
-    geneticAlgorithm(m, n, construction, weight, population, value);
+    GeneticAlgorithm ga(m, n, construction, weight);
+    ga.solve();
 
     // Print the final result
     int ind = -1;
     int a = INT_MAX;
 
-    for(int i=0; i<value.size(); i++)
+    for(int i=0; i<ga.value.size(); i++)
     {
-        if(value[i] < a)
+        if(ga.value[i] < a)
         {
-            a = value[i];
+            a = ga.value[i];
             ind = i;
         }
     }
 
 
-    cout<<"Minimized value = "<<value[ind]<<endl;
-    // print_chromosome(population[ind], m, n);
+    cout<<"Minimized value = "<<ga.value[ind]<<endl;
+    // ga.print_chromosome(population[ind]);
     cout<<endl;
     cout<<"Stations to be built: ";
     for(int i=0; i<m; i++)
-        if(population[ind][i] >= 0)
+        if(ga.population[ind][i] >= 0)
             cout<<"station-"<<i<<" ";
     
     cout<<endl;

@@ -58,10 +58,11 @@ int main()
 
             double elapsed1 = (double)(end-start)/CLOCKS_PER_SEC;
             
-            vector<vector<int>> population;
-            vector<int> value;
+            
+            GeneticAlgorithm ga(i, j, construction, cost);
+
             start = clock();
-            geneticAlgorithm(i, j, construction, cost, population, value);
+            ga.solve();
             end = clock();
 
             double elapsed2 = (double)(end-start)/CLOCKS_PER_SEC;

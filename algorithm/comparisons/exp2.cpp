@@ -49,15 +49,13 @@ int main()
         generate_test_case(m, n, construction, cost);
 
         BruteForce bf(m, n, construction, cost);
-
         pair<int, int> tmp = bf.solve();
 
-        vector<vector<int>> population;
-        vector<int> value;
-        geneticAlgorithm(m, n, construction, cost, population, value);
+        GeneticAlgorithm ga(m, n, construction, cost);
+        ga.solve();
 
         int a = INT_MAX;
-        for(auto x: value)
+        for(auto x: ga.value)
             a = min(a, x);
 
         // if(tmp.first > a)

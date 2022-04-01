@@ -3,17 +3,38 @@
 using namespace std;
 
 
-vector<int> random_chromosome(int m, int n);
+class GeneticAlgorithm
+{
+private:
+    int m, n;   // number of candidate sites, number of clients
+    vector<int> construction;
+    vector<vector<int>> weight;
 
-void permutate(int begin, int end, vector<int> &);
 
-void print_chromosome(vector<int> &chromosome, int m, int n);
+public:
+    GeneticAlgorithm(int _m, int _n, vector<int> &_construction, vector<vector<int>> &_weight):
+        m(_m), n(_n), construction(_construction), weight(_weight)
+    {}
 
 
-int objective_function(vector<int> &chromosome, int m, int n, vector<int> &construction, vector<vector<int>> &weight);
+    vector<vector<int>> population;
+    vector<int> value;
 
-pair<vector<int>, vector<int>> crossover(vector<int> &chr1, vector<int> &chr2, int m, int n);
+    void solve();
 
-void validate(vector<int> &chromosome, int m, int n);
+    void print_chromosome(const vector<int> &chromosome) const;
 
-void geneticAlgorithm(int m, int n, vector<int> &construction, vector<vector<int>> &weight, vector<vector<int>> &population, vector<int> &value);
+
+private:
+
+    vector<int> random_chromosome();
+
+    void permutate(int begin, int end, vector<int> &arr);
+
+    pair<vector<int>, vector<int>> crossover(vector<int> &chr1, vector<int> &chr2);
+
+    void validate(vector<int> &chromosome);
+
+    int objective_function(vector<int> &chromosome) const;
+    int locate(int key, const vector<int> &arr) const;
+};
