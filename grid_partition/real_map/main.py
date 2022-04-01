@@ -47,21 +47,24 @@ print()
 # plot_graph(graph, coord, pr.color, 'partitioned.png')
 # print()
 
-
-# compo = set(pr.components[0])
-# plot_component(graph, compo, coord, pr.color, 'component.png')
-
 pl = Placement(graph, coord, demands)
 
-pl.setComponent(pr.components[0])
+cnt = 1
+for component in pr.components:
+    # plot_component(graph, set(component), coord, pr.color, 'component'+str(cnt)+'.png')
+    # cnt += 1
 
-print('Brute-force: ')
-# pl.bruteForce()
-print()
+    pl.setComponent(pr.components[0])
 
-print('Genetic algorithm: ')
-pl.findLocation()
-print()
+    # print('Brute-force: ')
+    # pl.bruteForce()
+    # print()
+
+    print('Genetic algorithm: ')
+    pl.findLocation()
+    print()
+    break
+
 
 # import matplotlib.pyplot as plt
 # fig = plt.figure()

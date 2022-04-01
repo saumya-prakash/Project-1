@@ -19,14 +19,14 @@ int main()
 
     cout<<"Enter the cost function: ";
     vector<int> construction(m, 0);
-    
+    // construction cost for reach candidate site
     for(int i=0; i<m; i++)
         cin>>construction[i];
 
 
     cout<<"Enter the cost matrix: ";
     vector<vector<int>> weight(n, vector<int>(m, 0));
-    
+    // weight matrix (n x m) (number of clients x number of candidate sites)
     for(int i=0; i<n; i++)
         for(int j=0; j<m; j++)
             cin>>weight[i][j];

@@ -46,6 +46,7 @@ vector<int> random_chromosome(int m, int n)
 }
 
 
+
 // This function permutates the given array range
 // linear time complexity
 void permutate(int begin, int end, vector<int> &arr)
@@ -65,6 +66,7 @@ void permutate(int begin, int end, vector<int> &arr)
 }
 
 
+
 // This function prints the chromosome
 // O(m+n)
 void print_chromosome(vector<int> &chromosome, int m, int n)
@@ -81,6 +83,7 @@ void print_chromosome(vector<int> &chromosome, int m, int n)
 
     return;
 }
+
 
 
 // O(log m)
@@ -328,33 +331,63 @@ void geneticAlgorithm(int m, int n, vector<int> &construction, vector<vector<int
 
 
     // Run for 'iter' iterations
-    int iter = 10000;
+    
+    const int N = 10000;
+    int iter = 1;
     // O(N*[N + mlog(m) + n])
-    while(iter > 0)
+    while(iter <= N)
     {
-        // cout<<iter<<endl;
+        // cout<<"Iteration: "<<iter<<"..."<<endl;
 
         // Select 2 chromosomes
         vector<int> chr1, chr2;
 
+        
+        // for(int i=0; i<population.size() && cnt>0; i++)
+        // {
+        //     int cur = value[i];
+
+        //     double prob = 1 - (double)value[i] / total;
+
+        //     if(drand48() <= prob)
+        //     {
+        //         chr2 = chr1;
+        //         chr1 = population[i];
+
+        //         cnt--;
+        //     }
+        // }
+
+
+        // maybe use roulette wheel selection
         int cnt = 2;
-        for(int i=0; i<population.size() && cnt>0; i++)
+        int target = drand48()*total;
+        int sum = 0;
+        for(int i=0; i<population.size(); i++)
         {
-            int cur = value[i];
-
-            double prob = 1 - (double)value[i] / total;
-
-            if(drand48() <= prob)
+            sum += value[i];
+            if(sum >= target)
             {
-                chr2 = chr1;
                 chr1 = population[i];
-
-                cnt--;
+                break;
             }
         }
 
-        if(cnt > 0)
+        target = drand48()*total;
+        sum = 0;
+        for(int i=0; i<population.size(); i++)
         {
+            sum += value[i];
+            if(sum >= target)
+            {
+                chr2 = population[i];
+                break;
+            }
+        }
+
+        if(chr1.empty() || chr2.empty())
+        {
+            iter++;
             continue;
         }
 
@@ -377,7 +410,7 @@ void geneticAlgorithm(int m, int n, vector<int> &construction, vector<vector<int
         total += a;
         value.push_back(a);
 
-        iter--;  
+        iter++;  
     }
 
 

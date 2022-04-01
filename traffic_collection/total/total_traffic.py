@@ -34,20 +34,9 @@ KEY = 'GL4Ghj-44nBGKEZYxt8GKnQoi25c8qlFe98nX6nGJ1U'
 import time
 import requests
 from bs4 import BeautifulSoup
-from math import radians
-from sklearn.metrics.pairwise import haversine_distances
 from xml.etree.ElementTree import fromstring
 from datetime import datetime
 
-
-def distance(a, b):
-    '''This function returns distance between 2 lat-long pairs using the Haversine distance'''
-    c = list(map(radians, a))
-    d = list(map(radians, b))
-
-    res = haversine_distances([c, d]) * 6378100
-
-    return res[0][1]
 
 
 def getData(top_left, bottom_right):
@@ -127,6 +116,6 @@ if __name__ == '__main__':
     bottom_right = '28.547244344345092, 77.41867712678446'
 
 
-    for _ in range(10):
+    while True:
         getData(top_left, bottom_right)
-        time.sleep(120)
+        time.sleep(60)

@@ -1,5 +1,11 @@
-#include "./brute_force/brute_force.h"
-#include "./genetic/genetic.h"
+/*
+writes the results to the 'comps' file
+writes <best, worst, GA's answer>
+*/
+
+#include "../brute_force/brute_force.h"
+#include "../genetic/genetic.h"
+
 
 void generate_test_case(int m, int n, vector<int> &construction_cost, vector<vector<int>> &distance_cost)
 {

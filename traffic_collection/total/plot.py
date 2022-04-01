@@ -1,6 +1,5 @@
 from matplotlib import pyplot as plt
-
-
+from datetime import datetime
 
 
 def plot_total_traffic_level(filename):
@@ -8,21 +7,29 @@ def plot_total_traffic_level(filename):
     x = []  # to store the x coordinates
     y = []  # to store the y coordinates
     
+    i = 0
     with open(filename, 'r') as fi:
         for line in fi.readlines():
             line = line[:-1]
             line = line.split(' ')
 
-            x.append(line[0])
-            y.append(line[1])
+            a = datetime.strptime(line[0], "%H:%M:%S")
+
+            x.append(a)
+            i += 1
+            y.append(float(line[1]))
             
+    
 
     fig, ax = plt.subplots()
 
-    plt.plot(x, y)
-
-    ax.set_xticklabels([])
+    ax.set_xlabel('Time')
     ax.set_ylabel('Traffic Level')
+
+    # ax.set_xticklabels([])
+
+
+    plt.plot(x, y)
 
     plt.show()
     

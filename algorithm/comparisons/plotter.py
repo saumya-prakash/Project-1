@@ -1,3 +1,5 @@
+# reads the 'stats' and the 'comps' file, and plots graphs
+
 import matplotlib.pyplot as plt
 
 with open('stats', 'r') as fi:

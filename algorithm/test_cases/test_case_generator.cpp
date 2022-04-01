@@ -6,8 +6,8 @@ int main()
 {
     srand(time(NULL));
 
-    int m = 50;
-    int n = 200;
+    int m = 50;     // number of candidate sites
+    int n = 10000;    // number of nodes
 
     vector<int> construction_cost(m, 0);
     for(int i=0; i<m; i++)
@@ -26,8 +26,11 @@ int main()
 
 
     // write to a file
+
+    string filename = to_string(n) + "_" + to_string(m);
+
     ofstream fi;
-    fi.open("test3", ofstream::out);
+    fi.open(filename, ofstream::out);
 
     fi<<m<<" "<<n<<endl;
     for(int i=0; i<m; i++)
