@@ -35,32 +35,44 @@ int main()
     cout<<endl<<endl;
     
     GeneticAlgorithm ga(m, n, construction, weight);
-    ga.solve();
+    // ga.solve();
 
-    // Print the final result
-    int ind = -1;
-    int a = INT_MAX;
+    // // Print the final result
 
-    for(int i=0; i<ga.value.size(); i++)
-    {
-        if(ga.value[i] < a)
-        {
-            a = ga.value[i];
-            ind = i;
-        }
-    }
+    // cout<<"Objective value = "<<ga.best_objective_value()<<endl;
+    // ga.print_chromosome(ga.best_chromosome());
+    // cout<<endl;
 
+    // vector<int> arr = ga.best_chromosome();
 
-    cout<<"Minimized value = "<<ga.value[ind]<<endl;
-    // ga.print_chromosome(ga.population[ind]);
-    cout<<endl;
-    cout<<"Stations to be built: ";
-    for(int i=0; i<m; i++)
-        if(ga.population[ind][i] >= 0)
-            cout<<"station-"<<i<<" ";
-    
-    cout<<endl;
+    // cout<<"Stations to be built: ";
+    // for(int i=0; i<m; i++)
+    //     if(arr[i] >= 0)
+    //         cout<<"station-"<<i<<" ";
+
+    // cout<<endl;
+
+    vector<int> aux(11, -1);
+
+    aux[1] = 0;
+    aux[5] = 0;
+
+    aux[6] = 2;
+    aux[7] = 4;
+    aux[8] = 3;
+    aux[9] = 1;
+    aux[10] = 0;
+
+    // cout<<endl<<ga.objective_function(aux)<<endl;
+    ga.print_chromosome(aux);
+    ga.validate(aux);
+    ga.print_chromosome(aux);
+
 
     return 0;
 }
 
+/*******
+-1 0 -1 -1 -1 0 | 2 4 3 1 0 
+-1 -1 -1 -1 -1 0 | 2 4 3 1 0    -> what to do in this case - only one 0 and nothing else!?
+********/

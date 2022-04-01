@@ -14,7 +14,7 @@ void GeneticAlgorithm::solve()
     {
         vector<int> tmp = random_chromosome();
 
-        int a = objective_function(tmp);
+        long double a = fitness(tmp);
         total += a;
         population.push_back(tmp);
         value.push_back(a);
@@ -40,12 +40,12 @@ void GeneticAlgorithm::solve()
 
 
         // Add to the population
-        int a = objective_function(children.first);
+        long double a = fitness(children.first);
         total += a;
         population.push_back(children.first);
         value.push_back(a);
 
-        a = objective_function(children.second);
+        a = fitness(children.second);
         total += a;
         population.push_back(children.second);
         value.push_back(a);
@@ -61,7 +61,7 @@ void GeneticAlgorithm::solve()
 // create a fitness() function tht will assign proper weights to the individuals
 long double GeneticAlgorithm::fitness(const vector<int> &chromosome)
 {
-    int a = objective_function(chromosome);
+    long double a = objective_function(chromosome);
 
     int n = population.size();
 
@@ -177,8 +177,8 @@ pair<vector<int>, vector<int>> GeneticAlgorithm::select()
     // use roulette wheel selection
 
     // First individual
-    int target = drand48()*total;
-    int sum = 0;
+    long double target = drand48()*total;
+    long double sum = 0;
     
     for(int i=0; i<population.size(); i++)
     {
@@ -422,3 +422,37 @@ void GeneticAlgorithm::print_chromosome(const vector<int> &chromosome) const
     return;
 }
 
+
+vector<int> GeneticAlgorithm::best_chromosome() const
+{
+    int ind = 0;
+    long double a = value[0];
+
+    for(int i=0; i<value.size(); i++)
+    {
+        if(a < value[i])
+        {
+            a = value[i];
+            ind = i;
+        }
+    }
+
+    return population[ind];
+}
+
+int GeneticAlgorithm::best_objective_value()
+{
+    int ind = 0;
+    long double a = value[0];
+
+    for(int i=0; i<value.size(); i++)
+    {
+        if(a < value[i])
+        {
+            a = value[i];
+            ind = i;
+        }
+    }
+
+    return objective_function(population[ind]);
+}

@@ -6,8 +6,14 @@ int main()
 {
     srand(time(NULL));
 
-    int m = 50;     // number of candidate sites
-    int n = 10000;    // number of nodes
+    int m = 0;     // number of candidate sites
+    int n = 0;    // number of nodes
+
+    cout<<"Enter number of candidate sites: ";
+    cin>>m;
+
+    cout<<"Enter number of nodes: ";
+    cin>>n;
 
     vector<int> construction_cost(m, 0);
     for(int i=0; i<m; i++)
