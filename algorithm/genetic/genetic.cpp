@@ -1,7 +1,6 @@
 #include "genetic.h"
 
 
-
 // TODO: Implement CULLING MAYBE?? -> then maybe use linked list to store population and value?
 
 void GeneticAlgorithm::solve()
@@ -20,7 +19,6 @@ void GeneticAlgorithm::solve()
         population.push_back(tmp);
         value.push_back(a);
     }
-
 
     // Run for 'iter' iterations
     
@@ -55,7 +53,6 @@ void GeneticAlgorithm::solve()
         iter++;  
     }
 
-
     return;
 }
 
@@ -74,7 +71,7 @@ long double GeneticAlgorithm::fitness(const vector<int> &chromosome)
 }
 
 
-// This function calculates the objective function on the given chromosome 
+// Calculates the objective function on the given chromosome 
 // m*log(m) + m*log(m) + n
 // O(m*log(m) + n) 
 int GeneticAlgorithm::objective_function(const vector<int> &chromosome)
