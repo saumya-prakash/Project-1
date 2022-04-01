@@ -1,16 +1,17 @@
 #include "genetic.h"
 
 
+
+// TODO: Implement CULLING MAYBE?? -> then maybe use linked list to store population and value?
+
 void GeneticAlgorithm::solve()
 {
-    // // Create the initial chromosomes
+    // Create the initial chromosomes
+
     // population = vector<vector<int>>();
     // value = vector<int>();
 
-
-    int ini_num = 10;
-
-    for(int i=0; i<ini_num; i++)
+    while(population.size() < INITIAL_POPULATION_SIZE)
     {
         vector<int> tmp = random_chromosome();
         population.push_back(tmp);
@@ -23,10 +24,9 @@ void GeneticAlgorithm::solve()
 
     // Run for 'iter' iterations
     
-    const int N = 10000;
     int iter = 1;
     // O(N*[N + mlog(m) + n])
-    while(iter <= N)
+    while(iter <= NUMBER_OF_GENERATIONS)
     {
         // cout<<"Iteration: "<<iter<<"..."<<endl;
 
@@ -58,6 +58,10 @@ void GeneticAlgorithm::solve()
 
     return;
 }
+
+
+
+// create a fitness() function tht will assign proper weights to the indiviuals
 
 
 
@@ -111,7 +115,7 @@ int GeneticAlgorithm::objective_function(vector<int> &chromosome) const
 
 
 
-// This function creates a random chromosome and returns it
+// Creates and returns a random chromosome
 // O(m+n)
 vector<int> GeneticAlgorithm::random_chromosome()
 {
@@ -157,7 +161,7 @@ vector<int> GeneticAlgorithm::random_chromosome()
 }
 
 
-
+// Select 2 individuals from the popultion using the roulette-wheel method
 pair<vector<int>, vector<int>> GeneticAlgorithm::select()
 {
     // Select 2 chromosomes
@@ -184,7 +188,7 @@ pair<vector<int>, vector<int>> GeneticAlgorithm::select()
     // Second individual
     target = drand48()*(total-value[ind1]);
     sum = 0;
-    
+
     for(int i=0; i<population.size(); i++)
     {
         if(i != ind1)

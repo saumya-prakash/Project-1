@@ -52,7 +52,7 @@ int main()
 
 
     cout<<"Minimized value = "<<ga.value[ind]<<endl;
-    // ga.print_chromosome(population[ind]);
+    // ga.print_chromosome(ga.population[ind]);
     cout<<endl;
     cout<<"Stations to be built: ";
     for(int i=0; i<m; i++)
