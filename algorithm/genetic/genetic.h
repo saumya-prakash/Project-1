@@ -9,7 +9,9 @@ private:
     int m, n;   // number of candidate sites, number of clients
     vector<int> construction;
     vector<vector<int>> weight;
-    int total;  // to store the sum of values in value[]
+
+    int total;  // to store the sum of special weights assigned to the individuals
+    long double mean;
 
     /*******
     Use 'test3' to show that initial poopulation size and number of iterations matter -> (10, 100) to
@@ -22,7 +24,7 @@ private:
 
 public:
     GeneticAlgorithm(int _m, int _n, vector<int> &_construction, vector<vector<int>> &_weight):
-        m(_m), n(_n), construction(_construction), weight(_weight), total(0)
+        m(_m), n(_n), construction(_construction), weight(_weight), total(0), mean(0.00)
     {}
 
     vector<vector<int>> population;
@@ -44,6 +46,9 @@ private:
 
     void validate(vector<int> &chromosome);
 
-    int objective_function(vector<int> &chromosome) const;
+    long double fitness(const vector<int> &chromosome);
+
+    int objective_function(const vector<int> &chromosome);
+    
     int locate(int key, const vector<int> &arr) const;
 };

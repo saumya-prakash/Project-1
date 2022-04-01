@@ -14,10 +14,10 @@ void GeneticAlgorithm::solve()
     while(population.size() < INITIAL_POPULATION_SIZE)
     {
         vector<int> tmp = random_chromosome();
-        population.push_back(tmp);
 
         int a = objective_function(tmp);
         total += a;
+        population.push_back(tmp);
         value.push_back(a);
     }
 
@@ -42,14 +42,14 @@ void GeneticAlgorithm::solve()
 
 
         // Add to the population
-        population.push_back(children.first);
         int a = objective_function(children.first);
         total += a;
+        population.push_back(children.first);
         value.push_back(a);
 
-        population.push_back(children.second);
         a = objective_function(children.second);
         total += a;
+        population.push_back(children.second);
         value.push_back(a);
 
         iter++;  
@@ -61,14 +61,23 @@ void GeneticAlgorithm::solve()
 
 
 
-// create a fitness() function tht will assign proper weights to the indiviuals
+// create a fitness() function tht will assign proper weights to the individuals
+long double GeneticAlgorithm::fitness(const vector<int> &chromosome)
+{
+    int a = objective_function(chromosome);
 
+    int n = population.size();
+
+    mean = (static_cast<long double>(n)/(n+1))*mean + a/static_cast<long double>(n+1);
+
+    return mean/a;
+}
 
 
 // This function calculates the objective function on the given chromosome 
 // m*log(m) + m*log(m) + n
 // O(m*log(m) + n) 
-int GeneticAlgorithm::objective_function(vector<int> &chromosome) const
+int GeneticAlgorithm::objective_function(const vector<int> &chromosome)
 {
     int res = 0;  // to store the result
 
