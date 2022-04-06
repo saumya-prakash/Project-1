@@ -1,8 +1,11 @@
 #
 map.html
 *.csv
-*.out
 .vscode
+
+# For C++ object code, executables
+*.out
+*.o 
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
