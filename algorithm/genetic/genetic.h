@@ -31,13 +31,13 @@ public:
     int best_objective_value();
     void print_chromosome(const vector<int> &chromosome) const;
 
+
+private:
+
     int objective_function(const vector<int> &chromosome);
 
     void validate(vector<int> &chromosome);
     
-
-private:
-
     vector<int> random_chromosome();
 
     pair<vector<int>, vector<int>> select();

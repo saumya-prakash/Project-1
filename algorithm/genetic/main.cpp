@@ -35,44 +35,21 @@ int main()
     cout<<endl<<endl;
     
     GeneticAlgorithm ga(m, n, construction, weight);
-    // ga.solve();
+    ga.solve();
 
-    // // Print the final result
-
-    // cout<<"Objective value = "<<ga.best_objective_value()<<endl;
+    // Print the final result
+    cout<<"Objective value = "<<ga.best_objective_value()<<endl;
     // ga.print_chromosome(ga.best_chromosome());
-    // cout<<endl;
+    cout<<endl;
 
-    // vector<int> arr = ga.best_chromosome();
+    vector<int> arr = ga.best_chromosome();
 
-    // cout<<"Stations to be built: ";
-    // for(int i=0; i<m; i++)
-    //     if(arr[i] >= 0)
-    //         cout<<"station-"<<i<<" ";
+    cout<<"Stations to be built: ";
+    for(int i=0; i<m; i++)
+        if(arr[i] >= 0)
+            cout<<"station-"<<i<<" ";
 
-    // cout<<endl;
-
-    vector<int> aux(11, -1);
-
-    aux[1] = 0;
-    aux[5] = 0;
-
-    aux[6] = 2;
-    aux[7] = 4;
-    aux[8] = 3;
-    aux[9] = 1;
-    aux[10] = 0;
-
-    // cout<<endl<<ga.objective_function(aux)<<endl;
-    ga.print_chromosome(aux);
-    ga.validate(aux);
-    ga.print_chromosome(aux);
-
+    cout<<endl;
 
     return 0;
 }
-
-/*******
--1 0 -1 -1 -1 0 | 2 4 3 1 0 
--1 -1 -1 -1 -1 0 | 2 4 3 1 0    -> what to do in this case - only one 0 and nothing else!?
-********/

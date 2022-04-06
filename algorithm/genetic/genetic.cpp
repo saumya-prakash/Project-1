@@ -18,6 +18,7 @@ void GeneticAlgorithm::solve()
         total += a;
         population.push_back(tmp);
         value.push_back(a);
+
     }
 
     // Run for 'iter' iterations
@@ -112,6 +113,10 @@ int GeneticAlgorithm::objective_function(const vector<int> &chromosome)
             for(int j=key; j<a; j++)
                 // assign client-j to the station-i
                 res += weight[j][i];
+            
+            // cout<<a<<endl;
+            // if(a == -1)
+            //     cout<<"Next largest number found as "<<a<<" for "<<key<<endl;
         }
     }
 
@@ -125,7 +130,7 @@ int GeneticAlgorithm::objective_function(const vector<int> &chromosome)
 // O(m+n)
 vector<int> GeneticAlgorithm::random_chromosome()
 {
-    vector<int> chromosome(m+n, 0);
+    vector<int> chromosome(m+n, -1);
 
     // Create the charging station part
 
@@ -133,20 +138,19 @@ vector<int> GeneticAlgorithm::random_chromosome()
     chromosome[0] = 0;
 
     // store other IDs
+    // IDs in the range of 0 to n-1
+    // We can select upto m-1 value from this pool.
+    // Each value should be selected eactly once. 0 has already been selected.
     int a = 1;
     for(int i=1; i<n && a<m; i++)
     {
         if(rand()%2 == 0)
-        {
             chromosome[a] = -1;
-            a++;
-        }
 
         else
-        {
             chromosome[a] = i;
-            a++;
-        }
+
+        a++;
     }
 
     permutate(0, m, chromosome);
