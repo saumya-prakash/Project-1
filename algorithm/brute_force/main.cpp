@@ -3,7 +3,7 @@
 
 int main()
 {
-    // Candidate sites are numbered from 0 to m-s
+    // Candidate sites are numbered from 0 to m-1
     int m = 0;
     cout<<"Enter number of candidate locations: ";
     cin>>m;
@@ -28,7 +28,13 @@ int main()
             cin>>cost[i][j];
 
 
-    BruteForce bf = BruteForce(m, n, construction, cost);
+    vector<long double> traffic;
+    // traffic level at each client/node
+    for(int i=0; i<n; i++)
+        cin>>traffic[i];
+
+
+    BruteForce bf = BruteForce(m, n, construction, cost, traffic);
 
     // get the optimal value using brute-force technique
     cout<<"Calculating..."<<endl;

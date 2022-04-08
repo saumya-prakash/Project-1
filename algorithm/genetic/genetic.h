@@ -9,17 +9,18 @@ private:
     int m, n;   // number of candidate sites, number of clients
     vector<int> construction;
     vector<vector<int>> weight;
+    vector<long double> traffic;
 
     long double total;  // to store the sum of special weights assigned to the individuals
     long double mean;
 
-    const int INITIAL_POPULATION_SIZE = 10;
+    const int INITIAL_POPULATION_SIZE = 100;
     const int NUMBER_OF_GENERATIONS = 10000;
 
 
 public:
-    GeneticAlgorithm(int _m, int _n, vector<int> &_construction, vector<vector<int>> &_weight):
-        m(_m), n(_n), construction(_construction), weight(_weight), total(0), mean(0.00)
+    GeneticAlgorithm(int _m, int _n, vector<int> &_construction, vector<vector<int>> &_weight, vector<long double> &_traffic):
+        m(_m), n(_n), construction(_construction), weight(_weight), traffic(_traffic), total(0.00), mean(0.00)
     {}
 
     vector<vector<int>> population;
@@ -28,13 +29,13 @@ public:
     void solve();
 
     vector<int> best_chromosome() const;
-    int best_objective_value();
+    long double best_objective_value();
     void print_chromosome(const vector<int> &chromosome) const;
 
 
 private:
 
-    int objective_function(const vector<int> &chromosome);
+    long double objective_function(const vector<int> &chromosome);
 
     void validate(vector<int> &chromosome);
     

@@ -1,10 +1,15 @@
-#include <bits/stdc++.h>
+// #include <bits/stdc++.h>
+#include <iostream>
+#include <fstream>
+#include <vector>
+
 
 using namespace std;
 
 int main()
 {
     srand(time(NULL));
+    srand48(time(NULL));
 
     int m = 0;     // number of candidate sites
     int n = 0;    // number of nodes
@@ -17,7 +22,7 @@ int main()
 
     vector<int> construction_cost(m, 0);
     for(int i=0; i<m; i++)
-        construction_cost[i] = 1; //rand()%100 + 1;
+        construction_cost[i] = rand()%100 + 1;
 
 
     vector<vector<int>> distance_cost(n, vector<int>(m, 0));
@@ -31,6 +36,10 @@ int main()
         }
 
 
+    vector<long double> traffic(n, 0.00);
+    for(int i=0; i<n; i++)
+        traffic[i] = drand48()*2;
+
     // write to a file
 
     string filename = to_string(n) + "_" + to_string(m);
@@ -39,15 +48,21 @@ int main()
     fi.open(filename, ofstream::out);
 
     fi<<m<<" "<<n<<endl;
+
     for(int i=0; i<m; i++)
         fi<<construction_cost[i]<<" ";
-    
+    fi<<endl;
+
     for(int i=0; i<n; i++)
     {
         for(int j=0; j<m; j++)
             fi<<distance_cost[i][j]<<" ";
         fi<<endl;
     }
+
+    for(int i=0; i<n; i++)
+        fi<<traffic[i]<<" ";
+    fi<<endl;
 
     fi.close();
     return 0;

@@ -77,9 +77,9 @@ long double GeneticAlgorithm::fitness(const vector<int> &chromosome)
 // Calculates the objective function on the given chromosome 
 // m*log(m) + m*log(m) + n
 // O(m*log(m) + n) 
-int GeneticAlgorithm::objective_function(const vector<int> &chromosome)
+long double GeneticAlgorithm::objective_function(const vector<int> &chromosome)
 {
-    int res = 0;  // to store the result
+    long double res = 0;  // to store the result
 
     vector<int> aux;
     for(int i=0; i<m; i++)
@@ -114,7 +114,7 @@ int GeneticAlgorithm::objective_function(const vector<int> &chromosome)
 
             for(int j=key; j<a; j++)
                 // assign client-j to the station-i
-                res += weight[j][i];
+                res += weight[j][i]/traffic[j];
             
             // cout<<a<<endl;
             // if(a == -1)
@@ -446,7 +446,7 @@ vector<int> GeneticAlgorithm::best_chromosome() const
     return population[ind];
 }
 
-int GeneticAlgorithm::best_objective_value()
+long double GeneticAlgorithm::best_objective_value()
 {
     int ind = 0;
     long double a = value[0];

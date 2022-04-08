@@ -32,9 +32,14 @@ int main()
             cin>>weight[i][j];
 
 
+    vector<long double> traffic(n, 0.00);
+    // traffic level at each client/node
+    for(int i=0; i<n; i++)
+        cin>>traffic[i];
+
     cout<<endl<<endl;
     
-    GeneticAlgorithm ga(m, n, construction, weight);
+    GeneticAlgorithm ga(m, n, construction, weight, traffic);
     ga.solve();
 
     // Print the final result
