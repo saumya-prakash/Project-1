@@ -47,23 +47,32 @@ print()
 # plot_graph(graph, coord, pr.color, 'partitioned.png')
 # print()
 
-pl = Placement(graph, coord, demands)
+# pl = Placement(graph, coord, demands)
 
-cnt = 1
-for component in pr.components:
-    # plot_component(graph, set(component), coord, pr.color, 'component'+str(cnt)+'.png')
-    # cnt += 1
+with open('components.txt', 'w') as fi:
 
-    pl.setComponent(pr.components[0])
+    cnt = 1
+    for component in pr.components:
+        # plot_component(graph, set(component), coord, pr.color, 'component'+str(cnt)+'.png')
+        # cnt += 1
 
-    # print('Brute-force: ')
-    # pl.bruteForce()
-    # print()
+        # pl.setComponent(pr.components[0])
 
-    print('Genetic algorithm: ')
-    pl.findLocation()
-    print()
-    break
+        # # print('Brute-force: ')
+        # # pl.bruteForce()
+        # # print()
+
+        # print('Genetic algorithm: ')
+        # pl.findLocation()
+        # print()
+        # break
+
+        for a in component:
+            print(a, file=fi, end=' ')
+        print(file=fi)
+
+        
+
 
 
 # import matplotlib.pyplot as plt

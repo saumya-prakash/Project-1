@@ -43,6 +43,7 @@ int main()
     ga.solve();
 
     // Print the final result
+    cout<<fixed;
     cout<<"Objective value = "<<ga.best_objective_value()<<endl;
     // ga.print_chromosome(ga.best_chromosome());
     cout<<endl;
