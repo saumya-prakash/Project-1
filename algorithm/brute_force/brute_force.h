@@ -17,10 +17,10 @@ public:
         m(_m), n(_n), construction(_construction), cost(_cost), traffic(_traffic), allotment(vector<int>(n, -1))
     {}
 
-    pair<int, int> solve();
+    pair<long double, long double> solve();
 
 
 private:
-    void generate_check(int cur, int &best, int &worst);
+    void generate_check(int cur, long double &best, long double &worst);
 };
 

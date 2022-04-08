@@ -1,35 +1,35 @@
 #include "brute_force.h"
 
 
-pair<int, int> BruteForce::solve()
+pair<long double, long double> BruteForce::solve()
 {
     // can assign any station to a given client
     // generate all such assignments and check
 
     allotment = vector<int>(n, -1);
 
-    int best = INT_MAX;
-    int worst = INT_MIN;
+    long double best = numeric_limits<long double>::max();
+    long double worst = numeric_limits<long double>::lowest();
     generate_check(0, best, worst);
 
-    return pair<int, int>(best, worst);
+    return pair<long double, long double>(best, worst);
 }
 
 
-void BruteForce::generate_check(int cur, int &best, int &worst)
+void BruteForce::generate_check(int cur, long double &best, long double &worst)
 {
     if(cur == n)    // all clients assigned to some station
     {
         // calculate the total cost of this assignment
         vector<int> status(m, 0);
 
-        int tmp = 0;
+        long double tmp = 0;
         for(int i=0; i<allotment.size(); i++)
         {
             int st_id = allotment[i];
             status[st_id] = 1;
 
-            tmp += cost[i][st_id];
+            tmp += cost[i][st_id]/traffic[i];
         }
 
         for(int i=0; i<status.size(); i++)

@@ -28,7 +28,7 @@ int main()
             cin>>cost[i][j];
 
 
-    vector<long double> traffic;
+    vector<long double> traffic(n, 0.00);
     // traffic level at each client/node
     for(int i=0; i<n; i++)
         cin>>traffic[i];
@@ -39,7 +39,7 @@ int main()
     // get the optimal value using brute-force technique
     cout<<"Calculating..."<<endl;
 
-    pair<int, int> res = bf.solve();
+    pair<long double, long double> res = bf.solve();
     cout<<"Optimal value = "<<res.first<<endl;
     cout<<"Worst value = "<<res.second<<endl;
 
