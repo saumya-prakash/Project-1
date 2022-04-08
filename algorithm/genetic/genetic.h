@@ -16,6 +16,7 @@ private:
 
     const int INITIAL_POPULATION_SIZE = 100;
     const int NUMBER_OF_GENERATIONS = 10000;
+    const double CULL_PERCENT = 0.10;
 
 
 public:
@@ -41,6 +42,8 @@ private:
     
     vector<int> random_chromosome();
 
+    void cull();
+
     pair<vector<int>, vector<int>> select();
     void permutate(int begin, int end, vector<int> &arr);
 
@@ -51,6 +54,9 @@ private:
     long double fitness(const vector<int> &chromosome);
     
     int locate(int key, const vector<int> &arr) const;
+    
+    void search(int i, int j, int target);
+    int partition(int i, int j);
 };
 
 

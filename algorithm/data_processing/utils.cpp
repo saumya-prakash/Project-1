@@ -21,9 +21,13 @@ void process(const string &line)
     int n = node_to_id.size();  // total number of nodes
 
     // Now create the graph corresponding to this component.
-
     vector<vector<pair<int, long double>>> graph = get_graph(node_to_id);
 
+    // get a connected component now
+    // The partition is creating disconnected graphs. Now what to do?????
+    // Option one - take the largest connected component. It is very likely that the disconnected
+    // components lie on the outer periphery and don't contribute much. 
+    unordered_set<int> nodes = normalize(graph, id_to_node);
     
     
     // Get the candidte sites

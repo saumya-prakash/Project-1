@@ -40,6 +40,56 @@ vector<vector<pair<int, long double>>> get_graph(const unordered_map<int, int> &
 }
 
 
+bool connected_graph(const vector<vector<pair<int, long double>>> &graph)
+{
+    int n = graph.size();
+
+    vector<int> status(n, 0);
+
+    for(int i=0; i<n; i++)
+    {
+        if(status[i] != 0)
+            continue;
+
+        int cnt = 1;
+
+        queue<int> qu;
+        qu.push(i);
+        status[i] = 1;
+
+        while(!qu.empty())
+        {
+            int cur = qu.front();
+            qu.pop();
+
+            for(int j=0; j<graph[cur].size(); j++)
+            {
+                int b = graph[cur][j].first;
+
+                if(status[b] == 0)
+                {
+                    ++cnt;
+                    status[b] = 1;
+                    qu.push(b);
+                }
+            }
+
+            status[cur] = 2;
+        }
+
+        cout<<cnt<<endl;
+    }
+
+    return true;
+}
+
+
+unordered_set<int> normalize(vector<vector<pair<int, long double>>> &graph, const unordered_map<int, int> &id_to_node)
+{
+    
+}
+
+
 vector<long double> get_traffic(const unordered_map<int, int> &node_to_id)
 {
     int n = node_to_id.size();  // total number of nodes
@@ -122,61 +172,12 @@ vector<long double> dijkstra(int s, const vector<vector<pair<int, long double>>>
 }
 
 
-bool connected_graph(const vector<vector<pair<int, long double>>> &graph)
-{
-    int n = graph.size();
-
-    vector<int> status(n, 0);
-
-    for(int i=0; i<n; i++)
-    {
-        if(status[i] != 0)
-            continue;
-
-        int cnt = 1;
-
-        queue<int> qu;
-        qu.push(i);
-        status[i] = 1;
-
-        while(!qu.empty())
-        {
-            int cur = qu.front();
-            qu.pop();
-
-            for(int j=0; j<graph[cur].size(); j++)
-            {
-                int b = graph[cur][j].first;
-
-                if(status[b] == 0)
-                {
-                    ++cnt;
-                    status[b] = 1;
-                    qu.push(b);
-                }
-            }
-
-            status[cur] = 2;
-        }
-
-        cout<<cnt<<endl;
-    }
-
-
-    return true;
-}
-
 vector<vector<long double>> calculate_distance_matrix(const vector<vector<pair<int, long double>>> &graph, const vector<int> &sites)
 {
     int n = graph.size();
     int m = sites.size();
 
     vector<vector<long double>> dist(n, vector<long double>(m, -1.00));
-
-
-    // The partition is creating disconnected graphs. Now what to do?????
-    // Option one - take the largest connected component. It is very likely that the disconnected
-    // components lie on the outer periphery and don;t contribute much. 
 
     cout<<connected_graph(graph)<<endl;
     return dist;

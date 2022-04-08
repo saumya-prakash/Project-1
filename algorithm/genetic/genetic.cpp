@@ -30,6 +30,8 @@ void GeneticAlgorithm::solve()
         // cout<<"Iteration: "<<iter<<"..."<<endl;
 
         // Can do culling here
+        
+        cull();
 
         // // Select 2 chromosomes
         pair<vector<int>, vector<int>> individuals = select();
@@ -171,6 +173,7 @@ vector<int> GeneticAlgorithm::random_chromosome()
 
     return chromosome;
 }
+
 
 
 // Select 2 individuals from the popultion using the roulette-wheel method
@@ -461,4 +464,84 @@ long double GeneticAlgorithm::best_objective_value()
     }
 
     return objective_function(population[ind]);
+}
+
+
+
+
+void GeneticAlgorithm::cull()
+{
+    int n = population.size();
+
+    // Remove some of the chromosomes
+    int target = int(n-(CULL_PERCENT*n));
+
+    search(0, n-1, target);
+
+    // cout<<n<<" "<<target<<endl;
+
+    // total and mean should be adjusted accordingly !!!!
+    for(auto it=value.begin()+target; it != value.end(); ++it)
+        total -= *it;
+    
+    for(auto it=population.begin()+target; it != population.end(); ++it)
+    {
+        long double a = objective_function(*it);
+
+        mean = (static_cast<long double>(n)/(n-1))*mean - a/static_cast<long double>(n-1);
+        n--;
+    }
+
+    population.erase(population.begin()+target, population.end());    
+    value.erase(value.begin()+target, value.end());
+    
+    // may need to permutate population and value together
+
+    return;
+}
+
+
+void GeneticAlgorithm::search(int i, int j, int target)
+{
+    if(i >= j)
+        return;
+
+    int k = partition(i, j);
+
+    if(target == k)
+        return;
+    
+    if(target > k)
+        search(k+1, j, target);
+    
+    else
+        search(i, k-1, target);
+
+}
+
+
+int GeneticAlgorithm::partition(int i, int j)
+{
+    // Choose the last element as the pivot
+
+    int k = 0;
+    int l = 0;
+
+    while(l < j)
+    {
+        if(value[l] >= value[j])
+        {
+            swap(value[l], value[k]);
+            swap(population[l], population[k]);
+
+            k++;
+        }
+
+        l++;
+    }
+
+    swap(value[l], value[k]);
+    swap(population[l], population[k]);
+    
+    return k;
 }
