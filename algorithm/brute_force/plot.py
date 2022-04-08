@@ -14,18 +14,18 @@ with open('space.txt', 'r') as fi:
 
         a = float(a[:-1])
 
-        if 144.312693 <= a and flag == 0:
+        if 513.733479 <= a and flag == 0:
             flag = 1
-            h.append(144.312693)
+            h.append(513.733479)
             x.append(i)
-            w.append(10)
+            w.append(5)
             bar_color.append('red')
             i += 1
 
 
         h.append(a)
         x.append(i)
-        w.append(0.4)
+        w.append(0.5)
         bar_color.append('black')
         i += 1
 
