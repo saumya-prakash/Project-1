@@ -18,7 +18,14 @@ int main()
     string line;
     
     while(getline(fi, line))
+    {
         process(line);
+
+
+        // Just one component experiment
+        break;
+    }
+
 
 
     fi.close();

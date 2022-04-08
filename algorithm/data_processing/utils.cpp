@@ -1,4 +1,5 @@
 #include "utils.h"
+#include "graph.h"
 // #include "../genetic/genetic.h"
 
 void process(const string &line)
@@ -16,7 +17,10 @@ void process(const string &line)
         ++cnt;
     }
 
-    // Now create the grraph corresponding to this component.
+    // Now create the graph corresponding to this component.
+
+    vector<vector<pair<int, long double>>> graph = get_graph(node_to_id);
+
 
     // Get the candidte sites
 
@@ -24,4 +28,7 @@ void process(const string &line)
 
 
     // Get the traffic levels
+
+
+    // Call the genetic algorithm
 }
