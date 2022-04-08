@@ -43,5 +43,7 @@ int main()
     cout<<"Optimal value = "<<res.first<<endl;
     cout<<"Worst value = "<<res.second<<endl;
 
+    bf.save_space();
+
     return 0;
 }

@@ -16,7 +16,7 @@ private:
 
     const int INITIAL_POPULATION_SIZE = 100;
     const int NUMBER_OF_GENERATIONS = 10000;
-    const double CULL_PERCENT = 0.10;
+    const double CULL_PERCENT = 0.25;
 
 
 public:

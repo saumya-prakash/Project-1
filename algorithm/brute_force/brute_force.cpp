@@ -39,6 +39,8 @@ void BruteForce::generate_check(int cur, long double &best, long double &worst)
 
         }
 
+        values.push_back(tmp);
+
         best = min(best, tmp);
         worst = max(worst, tmp);
 
@@ -55,6 +57,17 @@ void BruteForce::generate_check(int cur, long double &best, long double &worst)
 }
 
 
+void BruteForce::save_space()
+{
+    sort(values.begin(), values.end());
+    
+    ofstream fi("space.txt", ostream::out);
 
+    for(auto a: values)
+        fi<<a<<'\n';
+
+    fi.close();
+    return;
+}
 
 

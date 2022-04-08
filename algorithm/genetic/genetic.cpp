@@ -29,9 +29,9 @@ void GeneticAlgorithm::solve()
     {
         // cout<<"Iteration: "<<iter<<"..."<<endl;
 
-        // Can do culling here
-        
-        cull();
+        // Do culling here
+        if(iter%500 == 0)
+            cull();
 
         // // Select 2 chromosomes
         pair<vector<int>, vector<int>> individuals = select();

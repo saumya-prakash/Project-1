@@ -18,9 +18,11 @@ public:
     {}
 
     pair<long double, long double> solve();
+    void save_space();
 
 
 private:
+    vector<long double> values;
     void generate_check(int cur, long double &best, long double &worst);
 };
 
