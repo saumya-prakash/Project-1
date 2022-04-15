@@ -12,6 +12,7 @@ vector<vector<pair<int, long double>>> get_graph(const unordered_map<int, int> &
     
     getline(fi, line);  // consume the header line
 
+
     while(getline(fi, line))
     {
         istringstream iss(line);
@@ -27,12 +28,13 @@ vector<vector<pair<int, long double>>> get_graph(const unordered_map<int, int> &
         
         if(node_to_id.find(v) == node_to_id.end())
             continue;
-        
+                
         int a = node_to_id.find(u)->second;
         int b = node_to_id.find(v)->second;
 
         graph[a].push_back({b, dist});
         graph[b].push_back({a, dist});
+
     }
 
     fi.close();
@@ -44,6 +46,8 @@ bool connected_graph(const vector<vector<pair<int, long double>>> &graph)
 {
     int n = graph.size();
 
+    int flag = 0;
+
     vector<int> status(n, 0);
 
     for(int i=0; i<n; i++)
@@ -52,6 +56,7 @@ bool connected_graph(const vector<vector<pair<int, long double>>> &graph)
             continue;
 
         int cnt = 1;
+        flag++;
 
         queue<int> qu;
         qu.push(i);
@@ -76,17 +81,99 @@ bool connected_graph(const vector<vector<pair<int, long double>>> &graph)
 
             status[cur] = 2;
         }
-
-        cout<<cnt<<endl;
+        cout<<"\t"<<cnt<<endl;
     }
+
+
+    if(flag > 1)
+        return false;
 
     return true;
 }
 
 
-unordered_set<int> normalize(vector<vector<pair<int, long double>>> &graph, const unordered_map<int, int> &id_to_node)
+
+vector<int> normalize(vector<vector<pair<int, long double>>> &graph)
 {
+    int n = graph.size();
     
+    int cnt = 0;
+    int start = -1;
+
+    vector<int> status(n, 0);
+
+    for(int i=0; i<n; i++)
+    {
+        if(status[i] != 0)
+            continue;
+    
+        queue<int> qu;
+        int cur_cnt = 0;
+
+        qu.push(i);
+        status[i] = 1;    
+
+        while(!qu.empty())
+        {
+            int a = qu.front();
+            cur_cnt++;
+            qu.pop();
+
+            for(int i=0; i<graph[a].size(); i++)
+            {
+                int b = graph[a][i].first;
+
+                if(status[b] == 0)
+                {
+                    qu.push(b);
+                    status[b] = 1;
+                }
+            }
+
+            status[a] = 2;
+        }
+
+        // cout<<cnt<<endl;
+        if(cur_cnt > cnt)
+        {
+            cnt = cur_cnt;
+            start = i;
+        }
+
+    }
+
+    cout<<start<<" "<<cnt<<endl;
+
+    vector<int> nodes;
+
+    status = vector<int>(n, 0);
+
+    queue<int> qu;
+
+    qu.push(start);
+    status[start] = 1;
+
+    while(!qu.empty())
+    {
+        int a = qu.front();
+        nodes.push_back(a);
+        qu.pop();
+
+        for(int i=0; i<graph[a].size(); i++)
+        {
+            int b = graph[a][i].first;
+
+            if(status[b] == 0)
+            {
+                qu.push(b);
+                status[b] = 1;
+            }
+        }
+
+        status[a] = 2;
+    }
+
+    return nodes;
 }
 
 
@@ -145,10 +232,10 @@ vector<long double> dijkstra(int s, const vector<vector<pair<int, long double>>>
 
         if(status[a] != 0)
             continue;
-        
+
         cnt++;
         status[a] = 1;
-        
+
         // cerr<<cnt<<endl;
 
 
@@ -168,6 +255,7 @@ vector<long double> dijkstra(int s, const vector<vector<pair<int, long double>>>
         }
     }
 
+
     return res;
 }
 
@@ -176,12 +264,12 @@ vector<vector<long double>> calculate_distance_matrix(const vector<vector<pair<i
 {
     int n = graph.size();
     int m = sites.size();
-
+    
     vector<vector<long double>> dist(n, vector<long double>(m, -1.00));
 
-    cout<<connected_graph(graph)<<endl;
-    return dist;
-
+    // cout<<connected_graph(graph)<<endl;
+    // return dist;
+    
     for(int i=0; i<m; i++)
     {
         int s = sites[i];

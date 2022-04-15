@@ -83,12 +83,16 @@ node_id = 0
 hash1 = dict()  # coordinates to node id
 hash2 = dict()  # node id to coordinates
 
+seen_pairs = set()
 edges = set()   # to store the edges of the graph; edges are undirected
 
 
 epsilon = 0.01  # when the retrieved data shows no traffic on a road, then assign epsilon traffic to it
 
 
+# It returns different edges for 2-way road: from point A to point b and from point B to point A.
+# The traffic levels on the 2 roads can be different. But in this implemenation, we are only considering
+# one of the 2 roads for NOW. Or , maybe we can try to add the traffic levels of both the road into one??
 # Consider all the roads, even the smaller ones
 for road in roads:
 
@@ -135,6 +139,7 @@ for road in roads:
 
             if (x1, y1) in hash1 and (x2, y2) in hash1:
                 pass
+
             else:
                 # at least one of the coordinates is a new node
                 if (x1, y1) not in hash1:
@@ -147,12 +152,19 @@ for road in roads:
                     hash2[node_id] = (x2, y2)
                     node_id += 1
 
-            a = hash1[(x1, y1)]
-            b = hash1[(x2, y2)]
+            c = hash1[(x1, y1)]
+            d = hash1[(x2, y2)]
 
-            a, b = min(a, b), max(a, b)
+            a = min(c, d)
+            b = max(c, d)
+
+            if (a, b) in seen_pairs:
+                continue
+
             edges.add((a, b, wt, name, traffic_level))
-
+            # if a==0 and b==1:
+            #     print(c, d, x1, y1, x2, y2, ' - ', name, wt, traffic_level)
+            seen_pairs.add((a, b))
 
 
 print('Number of nodes (Number of intersections) =', node_id)
@@ -164,14 +176,18 @@ print('Number of edges (Number of roads) =', len(edges))
 
 
 # Store the edges in edges.csv file
+
 with open('edges.csv', 'w') as fi:
     print('From', 'To', 'Length(meter)', 'Traffic_level', 'Name', file=fi)    
     for tup in edges:
-        a, b, wt, name, traffic_level = tup
+        a, b, wt, name, traffic_level = tup        
         print(a, b, wt, traffic_level, '"', file=fi, end='')
         print(name, '"', file=fi, sep='')
 
+
 print('edges.csv file generated')
+
+
 
 # Store the coordintates in coordinates.csv file
 with open('coordinates.csv', 'w') as fi:

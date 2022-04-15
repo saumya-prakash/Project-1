@@ -1,17 +1,18 @@
 
 all: a.out
 
+FLAGS=-g
 
 a.out: main.cpp utils.o graph.o
-		g++ main.cpp utils.o graph.o -o a.out
+		g++ main.cpp utils.o graph.o $(FLAGS) -o a.out
 
 
 utils.o: utils.h utils.cpp
-		g++ utils.cpp -c
+		g++ utils.cpp $(FLAGS) -c
 
 
 graph.o: graph.h graph.cpp
-		g++ graph.cpp -c
+		g++ graph.cpp $(FLAGS) -c
 
 
 clean:
