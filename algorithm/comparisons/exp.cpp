@@ -7,7 +7,7 @@ writes <size of the input (m=n), time taken by brute_force, time taken by GA>
 #include "../genetic/genetic.h"
 
 
-void generate_test_case(int m, int n, vector<int> &construction_cost, vector<vector<int>> &distance_cost)
+void generate_test_case(int m, int n, vector<int> &construction_cost, vector<vector<int>> &distance_cost, vector<long double> &traffic)
 {
     construction_cost = vector<int>(m, 0);
     
@@ -21,10 +21,14 @@ void generate_test_case(int m, int n, vector<int> &construction_cost, vector<vec
         for(int j=0; j<m; j++)
             
             if(rand()%5 == 0)
-                distance_cost[i][j] = rand()%100 + 250;
-            
+                distance_cost[i][j] = rand()%1000 + 1000;
             else
                 distance_cost[i][j] = rand()%100 + 1;
+
+
+    traffic = vector<long double>(n, 0.00);
+    for(int i=0; i<n; i++)
+        traffic[i] = drand48()*2;
 
     return;
 }
@@ -33,8 +37,11 @@ void generate_test_case(int m, int n, vector<int> &construction_cost, vector<vec
 
 int main()
 {    
+    srand(time(NULL));
+    
     vector<int> construction;
     vector<vector<int>> cost;
+    vector<long double> traffic;
 
     ofstream of("stats");
 
@@ -48,18 +55,18 @@ int main()
     {
         for(int j=i; j<=9; j++)
         {
-            generate_test_case(i, j, construction, cost);
+            generate_test_case(i, j, construction, cost, traffic);
 
-            BruteForce bf(i, j, construction, cost);
+            BruteForce bf(i, j, construction, cost, traffic);
 
             clock_t start = clock();
-            int res = bf.solve().first;
+            bf.solve().first;
             clock_t end = clock();
 
             double elapsed1 = (double)(end-start)/CLOCKS_PER_SEC;
             
             
-            GeneticAlgorithm ga(i, j, construction, cost);
+            GeneticAlgorithm ga(i, j, construction, cost, traffic);
 
             start = clock();
             ga.solve();

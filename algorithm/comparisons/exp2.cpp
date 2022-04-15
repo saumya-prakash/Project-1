@@ -7,7 +7,7 @@ writes <best, worst, GA's answer>
 #include "../genetic/genetic.h"
 
 
-void generate_test_case(int m, int n, vector<int> &construction_cost, vector<vector<int>> &distance_cost)
+void generate_test_case(int m, int n, vector<int> &construction_cost, vector<vector<int>> &distance_cost, vector<long double> &traffic)
 {
     construction_cost = vector<int>(m, 0);
     
@@ -21,10 +21,14 @@ void generate_test_case(int m, int n, vector<int> &construction_cost, vector<vec
         for(int j=0; j<m; j++)
             
             if(rand()%5 == 0)
-                distance_cost[i][j] = rand()%100 + 250;
-            
+                distance_cost[i][j] = rand()%1000 + 1000;
             else
                 distance_cost[i][j] = rand()%100 + 1;
+
+
+    traffic = vector<long double>(n, 0.00);
+    for(int i=0; i<n; i++)
+        traffic[i] = drand48()*2;
 
     return;
 }
@@ -45,18 +49,17 @@ int main()
 
         vector<int> construction;
         vector<vector<int>> cost;
+        vector<long double> traffic;
 
-        generate_test_case(m, n, construction, cost);
+        generate_test_case(m, n, construction, cost, traffic);
 
-        BruteForce bf(m, n, construction, cost);
-        pair<int, int> tmp = bf.solve();
+        BruteForce bf(m, n, construction, cost, traffic);
+        pair<long double, long double> tmp = bf.solve();
 
-        GeneticAlgorithm ga(m, n, construction, cost);
+        GeneticAlgorithm ga(m, n, construction, cost, traffic);
         ga.solve();
 
-        int a = INT_MAX;
-        for(auto x: ga.value)
-            a = min(a, x);
+        long double a = ga.best_objective_value();
 
         // if(tmp.first > a)
         // {
