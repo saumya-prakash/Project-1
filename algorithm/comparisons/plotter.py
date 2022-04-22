@@ -70,6 +70,19 @@ plt.savefig('comparison_with_brute_force.png')
 plt.show()
 
 
+rel_dist = []
+for i in range(len(x)):
+    rel_dist.append(100 - (y3[i]-y1[i])*100/(y2[i]-y1[i]))
+
+
+plt.xlabel('Testcase #')
+plt.ylabel('Relative distance')
+plt.plot(x[:N], rel_dist[:N])
+plt.legend()
+plt.savefig('relative_distance.png')
+plt.show()
+
+
 error = []
 for i in range(len(x)):
     error.append(abs(y1[i]-y3[i])/y1[i])
@@ -77,6 +90,7 @@ for i in range(len(x)):
 
 import numpy as np
 
+print('average relative distance =', np.mean(rel_dist), '%')
 print('minimum =', np.min(error))
 print('maximum =', np.max(error))
 print('mean =', np.mean(error))

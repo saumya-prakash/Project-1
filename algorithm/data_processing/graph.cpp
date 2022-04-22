@@ -142,7 +142,7 @@ vector<int> normalize(vector<vector<pair<int, long double>>> &graph)
 
     }
 
-    cout<<start<<" "<<cnt<<endl;
+    // cout<<start<<" "<<cnt<<endl;
 
     vector<int> nodes;
 

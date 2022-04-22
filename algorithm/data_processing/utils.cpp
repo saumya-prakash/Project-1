@@ -1,6 +1,6 @@
 #include "utils.h"
 #include "graph.h"
-// #include "../genetic/genetic.h"
+#include "../genetic/genetic.h"
 
 void process(const string &line)
 {
@@ -19,7 +19,6 @@ void process(const string &line)
 
 
     n = node_to_id.size();  // total number of nodes
-    // cout<<"Total nodes = "<<n<<endl;
 
     // Now create the graph corresponding to this component.
     vector<vector<pair<int, long double>>> graph = get_graph(node_to_id);
@@ -43,13 +42,12 @@ void process(const string &line)
     n = 0;
     for(auto a: final_nodes)
     {
-        // cout<<a<<endl;
         node_to_id[a] = n;
         id_to_node[n] = a;
         n++;
     }
 
-    cout<<n<<endl;
+    // n = total number of nodes in this normalized sub-graph/component
     graph = get_graph(node_to_id);
     if(n == 4)
     {
@@ -65,12 +63,13 @@ void process(const string &line)
     // Get the candidte sites
 
     // For testing only. Actual implementation to be done
-    vector<int> sites(1);
-    sites[0] = 2;
-    // sites[1] = 100;
-    // sites[2] = 200;
-    // sites[3] = 994;
-    // sites[4] = 1245;
+    int m = 5;
+    vector<int> sites(m);
+    sites[m-5] = 2;
+    sites[m-4] = 100;
+    sites[m-3] = 200;
+    sites[m-2] = 994;
+    sites[m-1] = 1245;
     // sites[5] = 2148;
     // sites[6] = 5769;
     // sites[7] = 9925;
@@ -79,21 +78,29 @@ void process(const string &line)
 
 
     // Get the construction costs
-
+    // Keep the construction costs same for now
+    vector<long double> construction_cost(m, 1.00);
 
 
     // Get the distance matrix
-    cout<<"Getting distance matrix..."<<endl;
+    cout<<"Computing distance matrix..."<<endl;
     vector<vector<long double>> dist = calculate_distance_matrix(graph, sites);
 
+    // cout<<dist.size()<<" "<<dist[0].size()<<'\n';
 
+    // cout<<dist[0][0]<<" "<<dist[0][100]<<'\n';
 
     // // Get the traffic levels
-    // vector<long double> traffic = get_traffic(node_to_id);
-
+    vector<long double> traffic = get_traffic(node_to_id);
 
 
     // Call the genetic algorithm
-    
+    cout<<"n = "<<n<<'\n';
+    cout<<"m = "<<m<<'\n';        
 
+    GeneticAlgorithm ga(m, n, construction_cost, dist, traffic);
+    ga.solve();
+
+    cout<<fixed;
+    cout<<ga.best_objective_value()<<'\n';
 }

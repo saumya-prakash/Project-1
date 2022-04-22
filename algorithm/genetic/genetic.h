@@ -3,12 +3,12 @@
 using namespace std;
 
 
-class GeneticAlgorithm
+class   GeneticAlgorithm
 {
 private:
     int m, n;   // number of candidate sites, number of clients
-    vector<int> construction;
-    vector<vector<int>> weight;
+    vector<long double> construction;
+    vector<vector<long double>> weight;
     vector<long double> traffic;
 
     long double total;  // to store the sum of special weights assigned to the individuals
@@ -20,7 +20,7 @@ private:
 
 
 public:
-    GeneticAlgorithm(int _m, int _n, vector<int> &_construction, vector<vector<int>> &_weight, vector<long double> &_traffic):
+    GeneticAlgorithm(int _m, int _n, vector<long double> &_construction, vector<vector<long double>> &_weight, vector<long double> &_traffic):
         m(_m), n(_n), construction(_construction), weight(_weight), traffic(_traffic), total(0.00), mean(0.00)
     {}
 
