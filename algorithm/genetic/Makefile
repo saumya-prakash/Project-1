@@ -1,13 +1,15 @@
 
 all: a.out
 
+FLAGS=
+
 
 a.out: main.cpp genetic.o
-	g++ main.cpp genetic.o -o a.out
+	g++ $(FLAGS) main.cpp genetic.o -o a.out
 
 
 genetic.o: genetic.h genetic.cpp
-	g++ genetic.cpp -c
+	g++ $(FLAGS) genetic.cpp -c
 
 
 

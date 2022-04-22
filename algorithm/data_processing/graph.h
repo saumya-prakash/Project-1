@@ -9,3 +9,5 @@ vector<int> normalize(vector<vector<pair<int, long double>>> &graph);
 vector<long double> get_traffic(const unordered_map<int, int> &node_to_id);
 
 vector<vector<long double>> calculate_distance_matrix(const vector<vector<pair<int, long double>>> &graph, const vector<int> &sites);
+
+void store_results(const vector<int> &station_nodes, const unordered_map<int, int> &id_to_node);

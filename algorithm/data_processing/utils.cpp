@@ -114,5 +114,20 @@ void process(const string &line)
         if(chrm[i] >= 0)
             cout<<"station-"<<i<<" ";
 
-    cout<<'\n';
+    cout<<"\n\n";
+
+    vector<int> station_nodes;
+
+    for(int i=0; i<m; i++)
+        if(chrm[i] >=0 )
+        {
+            // cout<<"Actual node in the graph = "<<sites[i]<<'\n';
+            station_nodes.push_back(sites[i]);
+
+            // cout<<"Actual node in the map = "<<id_to_node[sites[i]]<<'\n';
+            // Now find the corresponding lat-long pair
+        }
+    
+    store_results(station_nodes, id_to_node);
+
 }

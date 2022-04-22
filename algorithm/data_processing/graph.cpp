@@ -284,3 +284,15 @@ vector<vector<long double>> calculate_distance_matrix(const vector<vector<pair<i
 }
 
 
+
+void store_results(const vector<int> &station_nodes, const unordered_map<int, int> &id_to_node)
+{    
+    ofstream of("./data/stations_location", ofstream::out);
+
+    for(int i=0; i<station_nodes.size(); i++)
+        of<<id_to_node.find(station_nodes[i])->second<<" ";
+
+    of<<'\n';
+
+    of.close();
+}
