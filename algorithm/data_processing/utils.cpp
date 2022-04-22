@@ -63,18 +63,18 @@ void process(const string &line)
     // Get the candidte sites
 
     // For testing only. Actual implementation to be done
-    int m = 5;
+    int m = 10;
     vector<int> sites(m);
+    sites[m-10] = 9898;
+    sites[m-9] = 6511;
+    sites[m-8] = 3240;
+    sites[m-7] = 8748;
+    sites[m-6] = 5000;
     sites[m-5] = 2;
     sites[m-4] = 100;
-    sites[m-3] = 200;
+    sites[m-3] = 11028;
     sites[m-2] = 994;
     sites[m-1] = 1245;
-    // sites[5] = 2148;
-    // sites[6] = 5769;
-    // sites[7] = 9925;
-    // sites[8] = 4598;
-    // sites[9] = 10054;
 
 
     // Get the construction costs
@@ -102,5 +102,14 @@ void process(const string &line)
     ga.solve();
 
     cout<<fixed;
-    cout<<ga.best_objective_value()<<'\n';
+    cout<<"Best objective value = "<<ga.best_objective_value()<<'\n';
+
+
+    vector<int> chrm = ga.best_chromosome();
+    cout<<"Stations to be built: ";
+    for(int i=0; i<m; i++)
+        if(chrm[i] >= 0)
+            cout<<"station-"<<i<<" ";
+
+    cout<<'\n';
 }

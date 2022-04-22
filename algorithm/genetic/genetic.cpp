@@ -449,23 +449,11 @@ vector<int> GeneticAlgorithm::best_chromosome() const
     return population[ind];
 }
 
+
 long double GeneticAlgorithm::best_objective_value()
 {
-    int ind = 0;
-    long double a = value[0];
-
-    for(int i=0; i<value.size(); i++)
-    {
-        if(a < value[i])
-        {
-            a = value[i];
-            ind = i;
-        }
-    }
-
-    return objective_function(population[ind]);
+    return objective_function(best_chromosome());
 }
-
 
 
 
