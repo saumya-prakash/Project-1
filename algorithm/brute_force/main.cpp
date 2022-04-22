@@ -13,14 +13,14 @@ int main()
     cout<<"Enter number of clients: ";
     cin>>n;
 
-    vector<int> construction(m, 0);
+    vector<long double> construction(m, 0.00);
     cout<<"Enter the cost of construction array: ";
 
     for(int i=0; i<m; i++)
         cin>>construction[i];
 
 
-    vector<vector<int>> cost(n, vector<int>(m, 0));
+    vector<vector<long double>> cost(n, vector<long double>(m, 0));
     cout<<"Enter the transportation-cost matrix: ";
 
     for(int i=0; i<n; i++)

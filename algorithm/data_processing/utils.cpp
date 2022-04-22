@@ -57,6 +57,8 @@ void process(const string &line)
                 cout<<graph[i][j].first<<" "<<graph[i][j].second<<" ";
             cout<<endl;
         }
+
+        return;
     }
 
 
@@ -99,6 +101,7 @@ void process(const string &line)
     cout<<"m = "<<m<<'\n';        
 
     GeneticAlgorithm ga(m, n, construction_cost, dist, traffic);
+    
     ga.solve();
 
     cout<<fixed;

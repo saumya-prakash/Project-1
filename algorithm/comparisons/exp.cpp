@@ -7,23 +7,23 @@ writes <size of the input (m=n), time taken by brute_force, time taken by GA>
 #include "../genetic/genetic.h"
 
 
-void generate_test_case(int m, int n, vector<int> &construction_cost, vector<vector<int>> &distance_cost, vector<long double> &traffic)
+void generate_test_case(int m, int n, vector<long double> &construction_cost, vector<vector<long double>> &distance_cost, vector<long double> &traffic)
 {
-    construction_cost = vector<int>(m, 0);
+    construction_cost = vector<long double>(m, 0.00);
     
     for(int i=0; i<m; i++)
         construction_cost[i] = rand()%100 + 1;
 
 
-    distance_cost = vector<vector<int>>(n, vector<int>(m, 0));
+    distance_cost = vector<vector<long double>>(n, vector<long double>(m, 0.00));
     
     for(int i=0; i<n; i++)
         for(int j=0; j<m; j++)
             
             if(rand()%5 == 0)
-                distance_cost[i][j] = rand()%1000 + 1000;
+                distance_cost[i][j] = drand48()*1000 + 1000;
             else
-                distance_cost[i][j] = rand()%100 + 1;
+                distance_cost[i][j] = drand48()*100 + 1;
 
 
     traffic = vector<long double>(n, 0.00);
@@ -37,10 +37,10 @@ void generate_test_case(int m, int n, vector<int> &construction_cost, vector<vec
 
 int main()
 {    
-    srand(time(NULL));
+    srand48(time(NULL));
     
-    vector<int> construction;
-    vector<vector<int>> cost;
+    vector<long double> construction;
+    vector<vector<long double>> cost;
     vector<long double> traffic;
 
     ofstream of("stats");

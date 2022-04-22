@@ -8,7 +8,6 @@ using namespace std;
 
 int main()
 {
-    srand(time(NULL));
     srand48(time(NULL));
 
     int m = 0;     // number of candidate sites
@@ -20,19 +19,19 @@ int main()
     cout<<"Enter number of nodes: ";
     cin>>n;
 
-    vector<int> construction_cost(m, 0);
+    vector<long double> construction_cost(m, 0.00);
     for(int i=0; i<m; i++)
-        construction_cost[i] = rand()%100 + 1;
+        construction_cost[i] = drand48()*100 + 1;
 
 
-    vector<vector<int>> distance_cost(n, vector<int>(m, 0));
+    vector<vector<long double>> distance_cost(n, vector<long double>(m, 0.00));
     for(int i=0; i<n; i++)
         for(int j=0; j<m; j++)
         {
             if(rand()%5 == 0)
-                distance_cost[i][j] = rand()%1000 + 1000;
+                distance_cost[i][j] = drand48()*1000 + 1000;
             else
-                distance_cost[i][j] = rand()%100 + 1;
+                distance_cost[i][j] = drand48()*100 + 1;
         }
 
 
