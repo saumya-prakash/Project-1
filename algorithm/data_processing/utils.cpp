@@ -49,14 +49,14 @@ void process(const string &line)
 
     // n = total number of nodes in this normalized sub-graph/component
     graph = get_graph(node_to_id);
-    if(n == 4)
+    if(n <= 100)    // MAYBE TOO SMALL COMPONENT????
     {
-        for(int i=0; i<n; i++)
-        {
-            for(int j=0; j<graph[i].size(); j++)
-                cout<<graph[i][j].first<<" "<<graph[i][j].second<<" ";
-            cout<<endl;
-        }
+        // for(int i=0; i<n; i++)
+        // {
+        //     for(int j=0; j<graph[i].size(); j++)
+        //         cout<<graph[i][j].first<<" "<<graph[i][j].second<<" ";
+        //     cout<<endl;
+        // }
 
         return;
     }
@@ -71,6 +71,9 @@ void process(const string &line)
     int m = sites.size();
 
 
+    cout<<"Total number of nodes = "<<n<<endl;
+    cout<<"Number of candidate sites = "<<m<<endl;
+
     // Get the construction costs
     // Keep the construction costs same for now
     vector<long double> construction_cost(m, 1.00);
@@ -78,8 +81,10 @@ void process(const string &line)
 
 
     // Get the distance matrix
-    cout<<"Computing distance matrix..."<<endl;
+    cout<<"[-] Computing distance matrix..."<<endl;
     vector<vector<long double>> dist = calculate_distance_matrix(graph, sites);
+    cout<<"[+] Done"<<endl;
+
 
     // cout<<dist.size()<<" "<<dist[0].size()<<'\n';
 
@@ -87,9 +92,6 @@ void process(const string &line)
 
 
     // Call the genetic algorithm
-    cout<<"n = "<<n<<'\n';
-    cout<<"m = "<<m<<'\n';        
-
     GeneticAlgorithm ga(m, n, construction_cost, dist, traffic);
     
     ga.solve();
@@ -118,6 +120,21 @@ void process(const string &line)
             // Now find the corresponding lat-long pair
         }
     
+
+    // sites = vector<int>(station_nodes);
+    // m = sites.size();
+
+
+    // GeneticAlgorithm fa(m, n, construction_cost, dist, traffic);
+    
+    // fa.solve();
+
+    // cout<<fixed;
+    // cout<<"Best objective value = "<<fa.best_objective_value()<<'\n';
+
+
+
+
     store_results(sites, station_nodes, id_to_node);
 
 }

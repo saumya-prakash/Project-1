@@ -181,91 +181,108 @@ vector<int> normalize(vector<vector<pair<int, long double>>> &graph)
 
 vector<int> get_sites(const vector<vector<pair<int, long double>>> &graph, const vector<long double> &traffic)
 {
-    // // to store the nodes based on the order of their preference (max heap)
-    // priority_queue<pair<long double, int>> pq;
+    // to store the nodes based on the order of their preference (max heap)
+    priority_queue<pair<long double, int>> pq;
 
-    // int n = graph.size();
+    int n = graph.size();
 
-    // const int MAX_DEPTH = 10;
+    const int MAX_DEPTH = 10;
 
-    // for(int i=0; i<n; i++)
-    // {
-    //     // Find the 'weight' of node-i
-    //     vector<long double> traffic_layers;
-    //     vector<int> number_of_nodes;
+    for(int i=0; i<n; i++)
+    {
+        // Find the 'weight' of node-i
+        vector<long double> traffic_layers;
+        vector<int> number_of_nodes;
 
-    //     vector<int> dist(n, -1);
+        vector<int> dist(n, -1);
 
-    //     queue<int> qu;
+        queue<int> qu;
 
-    //     dist[i] = 0;
-    //     qu.push(i);
+        dist[i] = 0;
+        qu.push(i);
 
-    //     while(!qu.empty())
-    //     {
-    //         int cur = qu.front();
-    //         qu.pop();
+        while(!qu.empty())
+        {
+            int cur = qu.front();
+            qu.pop();
 
-    //         int depth = dist[cur];
-    //         if(depth > MAX_DEPTH)
-    //             break;
+            int depth = dist[cur];
+            if(depth > MAX_DEPTH)
+                break;
             
-    //         if(traffic_layers.size() == depth)
-    //             traffic_layers.push_back(0.00);
+            if(traffic_layers.size() == depth)
+                traffic_layers.push_back(0.00);
             
-    //         if(number_of_nodes.size() == depth)
-    //             number_of_nodes.push_back(0);
+            if(number_of_nodes.size() == depth)
+                number_of_nodes.push_back(0);
             
-    //         traffic_layers[depth] += traffic[cur];
-    //         number_of_nodes[depth]++;
+            traffic_layers[depth] += traffic[cur];
+            number_of_nodes[depth]++;
 
 
-    //         for(int i=0; i<graph[cur].size(); i++)
-    //         {
-    //             int a = graph[cur][i].first;
-    //             long double wt = graph[cur][i].second;  // any weightage of this?
+            for(int i=0; i<graph[cur].size(); i++)
+            {
+                int a = graph[cur][i].first;
+                long double wt = graph[cur][i].second;  // any weightage of this?
 
-    //             if(dist[a] != -1)
-    //                 continue;
+                if(dist[a] != -1)
+                    continue;
                 
-    //             dist[a] = depth + 1;
-    //             qu.push(a);
-    //         }
-    //     }
+                dist[a] = depth + 1;
+                qu.push(a);
+            }
+        }
 
-    //     long double weightage = 0.00;
-    //     for(int i=0; i<traffic_layers.size(); i++)
-    //         weightage += traffic_layers[i]*number_of_nodes[i];
+        long double weightage = 0.00;
+        for(int i=0; i<traffic_layers.size(); i++)
+            weightage += traffic_layers[i] + 2*number_of_nodes[i];
         
-    //     pq.push({weightage, i});
-    // }
+        pq.push({weightage, i});
+    }
 
-  
 
-    // for(int i=0; i<10; i++)
-    // {
-    //     cout<<pq.top().second<<"\t"<<pq.top().first<<'\n';
-    //     pq.pop();
-    // }
 
-    // Doesn't work as all the top nodes are concentrated in a locality
+    // All the top nodes are concentrated in a locality
+    // Maybe select 10-20 by jumping, or maybe sqrt(n) candidate sites:
+        // Very much improved, still few candidates close to each other
+        // Another approach can be to remove close sites by processing the nodes according to the 
+        // sorted order
 
+    vector<int> sites;
+    int m = pow(n, 0.67);
+    cout<<'\t'<<m<<endl;
+
+    while(!pq.empty())
+    {
+        sites.push_back(pq.top().second);
+
+        for(int j=0; j<m && !pq.empty(); j++)
+            pq.pop();
+    }
 
 
     // For testing only. Actual implementation to be done
     
-    int m = 10;
-    vector<int> sites(m);
-    sites[m-10] = 9898;
-    sites[m-9] = 6511;
-    sites[m-8] = 3240;
-    sites[m-7] = 8748;
-    sites[m-6] = 5000;
-    sites[m-5] = 2;
-    sites[m-4] = 100;
-    sites[m-3] = 11028;
-    sites[m-2] = 994;
-    sites[m-1] = 1245;
+    // int m = 100;
+    // vector<int> sites(m);
+    // sites[m-10] = 9898;
+    // sites[m-9] = 6511;
+    // sites[m-8] = 3240;
+    // sites[m-7] = 8748;
+    // sites[m-6] = 5000;
+    // sites[m-5] = 2;
+    // sites[m-4] = 100;
+    // sites[m-3] = 11028;
+    // sites[m-2] = 994;
+    // sites[m-1] = 1245;
+
+    // int a = 2;
+
+    // for(int i=0; i<100; i++)
+    // {
+    //     sites[i] = a;
+    //     a += 100;
+    // }
 
 
     return sites;

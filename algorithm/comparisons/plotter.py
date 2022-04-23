@@ -8,8 +8,10 @@ with open('stats', 'r') as fi:
 data = data.split('\n')
 data = data[:-1]
 
-x = []
+x1 = []
 y1 = []
+
+x2 = []
 y2 = []
 
 for row in data:
@@ -21,15 +23,18 @@ for row in data:
     t1 = float(row[2])  # time vale in seconds
     t2 = float(row[3])  # time value in seconds
 
-    x.append(m+n+m*n)
+    x1.append(m+n+m*n)
     y1.append(t1)
+    
+    x2.append(m+n+m*n)
     y2.append(t2)
+
 
 
 plt.xlabel('Input size')
 plt.ylabel('Running time (in seconds)')
-plt.plot(x, y1, label='Brute Force')
-plt.plot(x, y2, label='Genetic Algortihm')
+plt.plot(x1, y1, label='Brute Force')
+plt.plot(x2, y2, label='Genetic Algortihm')
 plt.legend()
 plt.savefig('running_time.png')
 plt.show()
@@ -75,13 +80,13 @@ for i in range(len(x)):
     rel_dist.append((y3[i]-y1[i])/(y2[i]-y1[i]))
 
 
-plt.xlabel('Testcase #')
-plt.ylabel('Relative distance')
-plt.plot(x[:N], rel_dist[:N])
+plt.xlabel('Relative distance')
+plt.ylabel('Frequency')
+# plt.plot(x[:N], rel_dist[:N])
 plt.legend()
-plt.savefig('relative_distance.png')
+plt.hist(rel_dist)
 plt.show()
-
+plt.savefig('relative_distance.png')
 
 error = []
 for i in range(len(x)):
