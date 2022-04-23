@@ -1,27 +1,40 @@
 import matplotlib.pyplot as plt
 
+
+a = set()
+c = set()  # all the candidate sites nodes
+b = set()  # all the station nodes
+
 # Collect the component nodes
 with open('../data/components.txt', 'r') as fi:
 
-    a = fi.readline()
-    a = a.split(' ')[:-1]   # remove the last '\n' character
-    a = list(map(int, a))
+    for line in fi.readlines():
+        line = line.split(' ')[:-1]   # remove the last '\n' character
+        line = list(map(int, line))
+        a = a.union(line)
 
 
 # Collect the site nodes and station nodes
 with open('../data/stations_location', 'r') as fi:
-    c = fi.readline()
-    c = c.split(' ')[:-1]
-    c = list(map(int, c))
-    
-    b = fi.readline()
-    b = b.split(' ')[:-1]
-    b = list(map(int, b))
 
+    data = fi.readlines()
 
-a = set(a)
-c = set(c)
-b = set(b)
+    i = 0
+    while i < len(data):
+
+        tmp = data[i]
+        tmp = tmp.split(' ')[:-1]
+        tmp = list(map(int, tmp))
+        
+        c = c.union(tmp)
+
+        tmp = data[i+1]
+        tmp = tmp.split(' ')[:-1]
+        tmp = list(map(int, tmp))
+
+        b = b.union(tmp)
+
+        i += 2
 
 
 coord = {}
@@ -58,7 +71,7 @@ plt.grid(False)
 plt.axis('off')
 
 with open('../data/edges.csv', 'r') as fi:
-    _ = fi.readline()   # consime the header line
+    _ = fi.readline()   # consume the header line
 
     for row in fi.readlines():
         row = row.split(' ')
@@ -69,7 +82,7 @@ with open('../data/edges.csv', 'r') as fi:
             p1 = coord[u]
             p2 = coord[v]
 
-            plt.plot([p1[0], p2[0]], [p1[1], p2[1]], color='black', linewidth=1)
+            plt.plot([p1[0], p2[0]], [p1[1], p2[1]], color='grey', linewidth=1)
 
     
 
@@ -78,11 +91,11 @@ alpha = 1.00001
 
 for key in sites_coord:
     x, y = sites_coord[key]
-    plt.plot([x, alpha*x], [y, alpha*y], color='red', linewidth=5)
+    plt.plot([x, alpha*x], [y, alpha*y], color='blue', linewidth=5)
 
 for key in s_coord:
     x, y = s_coord[key]
-    plt.plot([x, alpha*x], [y, alpha*y], color='green', linewidth=5)
+    plt.plot([x, alpha*x], [y, alpha*y], color='red', linewidth=5)
 
 
 plt.show()

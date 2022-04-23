@@ -8,9 +8,15 @@ using std::cout;
 using std::ifstream;
 using std::istream;
 using std::getline;
+using std::ofstream;
+
 
 int main()
 {
+    // Clear the output file
+    ofstream of("./data/stations_location", ofstream::out);
+    of.close();
+
     // Get the components one by one and run the algorithm on them
 
     ifstream fi("./data/components.txt", istream::in);
@@ -22,8 +28,8 @@ int main()
         process(line);
 
 
-        // Just one component experiment
-        break;
+        // // Just one component experiment
+        // break;
     }
 
 

@@ -72,7 +72,7 @@ plt.show()
 
 rel_dist = []
 for i in range(len(x)):
-    rel_dist.append(100 - (y3[i]-y1[i])*100/(y2[i]-y1[i]))
+    rel_dist.append((y3[i]-y1[i])/(y2[i]-y1[i]))
 
 
 plt.xlabel('Testcase #')
@@ -90,14 +90,27 @@ for i in range(len(x)):
 
 import numpy as np
 
-print('average relative distance =', np.mean(rel_dist), '%')
-print('minimum =', np.min(error))
-print('maximum =', np.max(error))
-print('mean =', np.mean(error))
-print('std =', np.std(error))
-print('0.25 quantile =', np.quantile(error, 0.25))
-print('0.50 quantile =', np.quantile(error, 0.50))
-print('0.75 quantile =', np.quantile(error, 0.75))
+print('Relative distance: ')
+print('\taverage =', np.mean(rel_dist))
+print('\tminimum =', np.min(rel_dist))
+print('\tmaximum =', np.max(rel_dist))
+print('\tstd =', np.std(rel_dist))
+print('\t0.25 quantile =', np.quantile(rel_dist, 0.25))
+print('\t0.50 quantile =', np.quantile(rel_dist, 0.50))
+print('\t0.75 quantile =', np.quantile(rel_dist, 0.75))
+
+
+
+
+print('\n')
+print('Error: ')
+print('\tminimum =', np.min(error))
+print('\tmaximum =', np.max(error))
+print('\tmean =', np.mean(error))
+print('\tstd =', np.std(error))
+print('\t0.25 quantile =', np.quantile(error, 0.25))
+print('\t0.50 quantile =', np.quantile(error, 0.50))
+print('\t0.75 quantile =', np.quantile(error, 0.75))
 
 
 plt.xlabel('Testcase #')

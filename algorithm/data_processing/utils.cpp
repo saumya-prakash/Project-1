@@ -62,26 +62,19 @@ void process(const string &line)
     }
 
 
-    // Get the candidte sites
+    // Get the traffic levels
+    vector<long double> traffic = get_traffic(node_to_id);
 
-    // For testing only. Actual implementation to be done
-    int m = 10;
-    vector<int> sites(m);
-    sites[m-10] = 9898;
-    sites[m-9] = 6511;
-    sites[m-8] = 3240;
-    sites[m-7] = 8748;
-    sites[m-6] = 5000;
-    sites[m-5] = 2;
-    sites[m-4] = 100;
-    sites[m-3] = 11028;
-    sites[m-2] = 994;
-    sites[m-1] = 1245;
+
+    // Get the candidte sites
+    vector<int> sites = get_sites(graph, traffic);
+    int m = sites.size();
 
 
     // Get the construction costs
     // Keep the construction costs same for now
     vector<long double> construction_cost(m, 1.00);
+
 
 
     // Get the distance matrix
@@ -91,9 +84,6 @@ void process(const string &line)
     // cout<<dist.size()<<" "<<dist[0].size()<<'\n';
 
     // cout<<dist[0][0]<<" "<<dist[0][100]<<'\n';
-
-    // // Get the traffic levels
-    vector<long double> traffic = get_traffic(node_to_id);
 
 
     // Call the genetic algorithm
