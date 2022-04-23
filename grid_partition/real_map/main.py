@@ -41,35 +41,35 @@ print()
 # refine_components(d, graph, demands, color, P)
 
 
-# pr.colorPartitions()
+pr.colorPartitions()
 
-# print('Plotting...')
-# plot_graph(graph, coord, pr.color, 'partitioned.png')
-# print()
+print('Plotting...')
+plot_graph(graph, coord, pr.color, 'partitioned.png')
+print()
 
 # pl = Placement(graph, coord, demands)
 
-with open('components.txt', 'w') as fi:
+# with open('components.txt', 'w') as fi:
 
-    cnt = 1
-    for component in pr.components:
-        # plot_component(graph, set(component), coord, pr.color, 'component'+str(cnt)+'.png')
-        # cnt += 1
+#     cnt = 1
+#     for component in pr.components:
+#         # plot_component(graph, set(component), coord, pr.color, 'component'+str(cnt)+'.png')
+#         # cnt += 1
 
-        # pl.setComponent(pr.components[0])
+#         # pl.setComponent(pr.components[0])
 
-        # # print('Brute-force: ')
-        # # pl.bruteForce()
-        # # print()
+#         # # print('Brute-force: ')
+#         # # pl.bruteForce()
+#         # # print()
 
-        # print('Genetic algorithm: ')
-        # pl.findLocation()
-        # print()
-        # break
+#         # print('Genetic algorithm: ')
+#         # pl.findLocation()
+#         # print()
+#         # break
 
-        for a in component:
-            print(a, file=fi, end=' ')
-        print(file=fi)
+#         for a in component:
+#             print(a, file=fi, end=' ')
+#         print(file=fi)
 
         
 

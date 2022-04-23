@@ -128,6 +128,6 @@ void process(const string &line)
             // Now find the corresponding lat-long pair
         }
     
-    store_results(station_nodes, id_to_node);
+    store_results(sites, station_nodes, id_to_node);
 
 }

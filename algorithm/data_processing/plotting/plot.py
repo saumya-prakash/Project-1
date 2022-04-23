@@ -8,25 +8,31 @@ with open('../data/components.txt', 'r') as fi:
     a = list(map(int, a))
 
 
-# Collect the station nodes
+# Collect the site nodes and station nodes
 with open('../data/stations_location', 'r') as fi:
+    c = fi.readline()
+    c = c.split(' ')[:-1]
+    c = list(map(int, c))
+    
     b = fi.readline()
     b = b.split(' ')[:-1]
     b = list(map(int, b))
 
 
 a = set(a)
+c = set(c)
 b = set(b)
 
-coord = {}
 
+coord = {}
+sites_coord = {}
 s_coord = {}
 
 
 with open('../data/coordinates.csv', 'r') as fi:
     _ = fi.readline()   # consume the header line
 
-    while len(a) > 0 or len(b) > 0:
+    while len(a) > 0:
 
         row = fi.readline()
         row = row.split(' ')
@@ -37,9 +43,13 @@ with open('../data/coordinates.csv', 'r') as fi:
             coord[node] = (lon, lat)
             a.remove(node)
 
-            if node in b:
-                s_coord[node] = (lon, lat)
-                b.remove(node)
+            if node in c:
+                sites_coord[node] = (lon, lat)
+                c.remove(node)
+
+                if node in b:
+                    s_coord[node] = (lon, lat)
+                    b.remove(node)
 
 
 
@@ -65,9 +75,14 @@ with open('../data/edges.csv', 'r') as fi:
 
 
 alpha = 1.00001
+
+for key in sites_coord:
+    x, y = sites_coord[key]
+    plt.plot([x, alpha*x], [y, alpha*y], color='red', linewidth=5)
+
 for key in s_coord:
     x, y = s_coord[key]
-    plt.plot([x, alpha*x], [y, alpha*y], color='red', linewidth=5)
+    plt.plot([x, alpha*x], [y, alpha*y], color='green', linewidth=5)
 
 
 plt.show()
