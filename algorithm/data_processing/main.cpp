@@ -29,7 +29,7 @@ int main()
 
 
         // // Just one component experiment
-        // break;
+        break;
     }
 
 

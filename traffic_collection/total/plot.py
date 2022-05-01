@@ -23,10 +23,10 @@ def plot_total_traffic_level(filename):
 
     fig, ax = plt.subplots()
 
-    ax.set_xlabel('Time')
+    ax.set_xlabel('Time of the Day')
     ax.set_ylabel('Traffic Level')
-
-    # ax.set_xticklabels([])
+    ax.set_xticklabels([])
+    ax.set_yticklabels([])
 
 
     plt.plot(x, y)

@@ -182,7 +182,7 @@ vector<int> normalize(vector<vector<pair<int, long double>>> &graph)
 vector<int> get_sites(const vector<vector<pair<int, long double>>> &graph, const vector<long double> &traffic)
 {
     // to store the nodes based on the order of their preference (max heap)
-    priority_queue<pair<long double, int>> pq;
+    vector<pair<long double, int>> pq;
 
     int n = graph.size();
 
@@ -237,7 +237,7 @@ vector<int> get_sites(const vector<vector<pair<int, long double>>> &graph, const
         for(int i=0; i<traffic_layers.size(); i++)
             weightage += traffic_layers[i] + 2*number_of_nodes[i];
         
-        pq.push({weightage, i});
+        pq.push_back({weightage, i});
     }
 
 
@@ -246,18 +246,22 @@ vector<int> get_sites(const vector<vector<pair<int, long double>>> &graph, const
     // Maybe select 10-20 by jumping, or maybe sqrt(n) candidate sites:
         // Very much improved, still few candidates close to each other
         // Another approach can be to remove close sites by processing the nodes according to the 
-        // sorted order
+        // sorted order. This approach can be implemented and tested.
+        // Or we can remove closely located sites after finding all the sites.
+
+    sort(pq.begin(), pq.end());
 
     vector<int> sites;
     int m = pow(n, 0.67);
-    cout<<'\t'<<m<<endl;
+    // cout<<'\t'<<m<<endl;
 
-    while(!pq.empty())
+    int i = 0;
+    while(i < n)
     {
-        sites.push_back(pq.top().second);
+        sites.push_back(pq[i].second);
 
-        for(int j=0; j<m && !pq.empty(); j++)
-            pq.pop();
+        for(int j=0; j<m; j++)
+            i++;
     }
 
 
