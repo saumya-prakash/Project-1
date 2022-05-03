@@ -63,13 +63,15 @@ void process(const string &line)
 
 
     // Get the traffic levels
+    cout<<"[-] Reading demands.csv..."<<endl;
     vector<long double> traffic = get_traffic(node_to_id);
+    cout<<"[+] Done"<<endl;
 
-
-    // Get the candidte sites
+    // Get the candidate sites
+    cout<<"[-] Proposing candidate sites"<<endl;
     vector<int> sites = get_sites(graph, traffic);
     int m = sites.size();
-
+    cout<<"[+] Done"<<endl;
 
     cout<<"Total number of nodes = "<<n<<endl;
     cout<<"Number of candidate sites = "<<m<<endl;
@@ -81,7 +83,7 @@ void process(const string &line)
 
 
     // Get the distance matrix
-    cout<<"[-] Computing distance matrix..."<<endl;
+    cout<<"[-] Computing the distance matrix..."<<endl;
     vector<vector<long double>> dist = calculate_distance_matrix(graph, sites);
     cout<<"[+] Done"<<endl;
 
@@ -94,7 +96,9 @@ void process(const string &line)
     // Call the genetic algorithm
     GeneticAlgorithm ga(m, n, construction_cost, dist, traffic);
     
+    cout<<"Running the genetic algorithm..."<<endl;
     ga.solve();
+    cout<<"[+] Done"<<endl;
 
     cout<<fixed;
     cout<<"Best objective value = "<<ga.best_objective_value()<<'\n';
@@ -132,9 +136,9 @@ void process(const string &line)
     // cout<<fixed;
     // cout<<"Best objective value = "<<fa.best_objective_value()<<'\n';
 
-
-
-
+    cout<<"[-] Storing the results..."<<endl;
     store_results(sites, station_nodes, id_to_node);
+    cout<<"[+] Done"<<endl;
 
+    return;
 }

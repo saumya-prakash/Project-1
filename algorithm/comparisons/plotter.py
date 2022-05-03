@@ -80,7 +80,7 @@ for i in range(len(x)):
     rel_dist.append((y3[i]-y1[i])/(y2[i]-y1[i]))
 
 
-plt.xlabel('Relative distance')
+plt.xlabel('Relative distance metric (d)')
 plt.ylabel('Frequency')
 # plt.plot(x[:N], rel_dist[:N])
 plt.legend()

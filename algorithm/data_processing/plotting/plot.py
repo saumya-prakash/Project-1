@@ -13,7 +13,7 @@ with open('../data/components.txt', 'r') as fi:
         line = list(map(int, line))
         a = a.union(line)
 
-        break   # for one component experiment
+        # break   # for one component experiment
 
 
 # Collect the site nodes and station nodes
