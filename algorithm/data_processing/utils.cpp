@@ -78,7 +78,7 @@ void process(const string &line)
 
     // Get the construction costs
     // Keep the construction costs same for now
-    vector<long double> construction_cost(m, 1.00);
+    vector<long double> construction_cost(m, 1000.00);
 
 
 

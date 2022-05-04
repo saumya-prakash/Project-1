@@ -55,17 +55,19 @@ print()
 
 ##################################################################################
 
-pr.colorPartitions()
+# pr.colorPartitions()
 
-print('[-] Plotting...')
-plot_graph(graph, coord, pr.color, 'partitioned.png')
-print('[+] Done')
+# print('[-] Plotting...')
+# plot_graph(graph, coord, pr.color, 'partitioned.png')
+# print('[+] Done')
+
 print()
 
 ##################################################
 # pl = Placement(graph, coord, demands)
 ##################################################
 
+print('[-] Saving the components...')
 with open('components.txt', 'w') as fi:
 
     cnt = 1
@@ -89,7 +91,7 @@ with open('components.txt', 'w') as fi:
 #         # print()
 #         # break
 
-
+print('[+] Done')
         
 
 

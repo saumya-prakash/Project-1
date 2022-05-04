@@ -23,18 +23,25 @@ for row in data:
     t1 = float(row[2])  # time vale in seconds
     t2 = float(row[3])  # time value in seconds
 
-    x1.append(m+n+m*n)
-    y1.append(t1)
+    # x1.append(m+n+m*n)
+    # y1.append(t1)
     
-    x2.append(m+n+m*n)
-    y2.append(t2)
+    # x2.append(m+n+m*n)
+    # y2.append(t2)
+
+    if m == n:
+        x1.append(m)
+        y1.append(t1)
+
+        x2.append(m)
+        y2.append(t2)
 
 
 
-plt.xlabel('Input size')
+plt.xlabel('Input size (m=n)')
 plt.ylabel('Running time (in seconds)')
 plt.plot(x1, y1, label='Brute Force')
-plt.plot(x2, y2, label='Genetic Algortihm')
+plt.plot(x2, y2, label='Genetic Algorithm')
 plt.legend()
 plt.savefig('running_time.png')
 plt.show()

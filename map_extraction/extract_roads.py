@@ -91,7 +91,7 @@ epsilon = 0.01  # when the retrieved data shows no traffic on a road, then assig
 
 
 # It returns different edges for 2-way road: from point A to point b and from point B to point A.
-# The traffic levels on the 2 roads can be different. But in this implemenation, we are only considering
+# The traffic levels on the 2 roads can be different. But in this implementation, we are only considering
 # one of the 2 roads for NOW. Or , maybe we can try to add the traffic levels of both the road into one??
 # Consider all the roads, even the smaller ones
 for road in roads:
